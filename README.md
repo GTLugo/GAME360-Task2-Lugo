@@ -1,3 +1,27 @@
-# GAME360-Task2-Lugo
+# Task 2: Singleton Implementation
 
-Unity project for ODU class GAME 360
+## Student Info
+
+- Name: Gabriel Lugo-Maldonado
+- ID: 01102327
+
+## Pattern: Singleton
+
+### Implementation
+
+[How you implemented it - 100 words]
+
+### Game Integration
+
+[How pattern is used - 100 words]
+
+## Game Description
+
+- Title: [Game Name]
+- Controls: [List them]
+- Objective: [How to win]
+
+## Repository Stats
+
+- Total Commits: [Number]
+- Development Time: [Hours]
