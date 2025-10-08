@@ -1,29 +1,42 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-  public static UIManager Instance;
+  public static UIManager self;
+
+  public GameObject scoreObject;
+  private TextMeshProUGUI scoreText;
+
+  public GameObject playerObject;
+  private PlayerController playerController;
 
   void Awake()
   {
-    if (Instance == null)
+    if (self == null)
     {
-      Instance = this;
+      self = this;
     }
     else
     {
       Destroy(gameObject);
       Debug.LogError("Extra ui manager");
     }
+
+    scoreText = scoreObject.GetComponent<TextMeshProUGUI>();
+    playerController = playerObject.GetComponent<PlayerController>();
+
+    Debug.Log(scoreText);
+    Debug.Log(playerController);
   }
 
   void Start()
   {
-
   }
 
   void Update()
   {
-
+    scoreText.text = "Score: " + playerController.Score;
   }
 }
