@@ -4,7 +4,7 @@ public class Collectible : MonoBehaviour
 {
   [Header("Collectible Settings")]
   public int scoreValue = 10;
-  public float rotationSpeed = 50f;
+  public float rotationSpeed = 100f;
 
   void Start()
   {
@@ -14,7 +14,7 @@ public class Collectible : MonoBehaviour
   void Update()
   {
     // Rotate the collectible for visual appeal
-    transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
+    transform.Rotate(Vector3.left * rotationSpeed * Time.deltaTime);
   }
 
   // Called when another collider enters this trigger collider
