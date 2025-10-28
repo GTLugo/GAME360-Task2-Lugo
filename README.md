@@ -1,31 +1,58 @@
-# Task 2: Singleton Implementation
+# Task 3: Complete Patterns Integration
 
-## Student Info
+## Project Evolution
 
-- Name: Gabriel Lugo-Maldonado
-- ID: 01102327
+## Task 2 Foundation
 
-## Pattern: Singleton
+- Singleton Pattern: GameManager, AudioManager
+- Basic game with centralized management
 
-### Implementation
+## Task 3 Additions
 
-The Singleton pattern is very simple. It is just a self-referencing variable which is checked upon
-initialization. If the variable is not set, then it is set to the current GameObject, otherwise the
-GameObject destroys itself. This ensures only a single instance is created (hence the name Singleton).
+## Observer Pattern
 
-### Game Integration
+- GameEvent Scriptable Objects for decoupled communication
+- Events implemented:
+  -- Collected coin
+  -- Scored updated
+  -- Level completed
+- Observers: UIManager, AudioManager
 
-I implemented the Singleton pattern in two places in the project: the main menu and the UI manager.
-The main menu uses a singleton to manage the state the menu is in (buttons being pressed).
-The UI manager in the game manages the score UI to update it depending on the current score of the player.
+## State Machine Pattern
 
-## Game Description
+- Player States:
+  -- Idle
+  -- Moving
+  -- Won
+- Game States: Enhanced from Task 2
+- State transitions:
+  -- Idle -> Moving
+  -- Moving -> Idle
+  -- Idle -> Won
+  -- Moving -> Won
 
-- Title: TASK1_Lugo
-- Controls: WASD - Directions
-- Objective: Collect as high a score as possible
+## Key Integration Points
 
-## Repository Stats
+1. Score System: Singleton → Observer → UI
+2. Player Actions: Input → State → Event → Audio
+3. Game Flow: GameState → Events → Scene Changes
 
-- Total Commits: 11
-- Development Time: 10 hours (combined)
+## Repository Statistics
+
+- Total Commits: 28
+- Task 3 Commits: 16
+- Lines of Code: ~600
+- Development Time: ~30 hrs
+
+## How to Play
+
+- Controls:
+  -- Move: WASD / Arrow keys
+  -- Exit: Esc
+- Objective: Collect 200 points
+- New Features:
+  -- Different size coins
+  -- Escape button
+  -- New character controller
+  -- Audio effects
+  
