@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
     float vertical = Input.GetAxisRaw("Vertical");     // W/S or Up/Down arrows
 
     // Create movement vector
-    Vector3 direction = Quaternion.AngleAxis(45, Vector3.up) * new Vector3(horizontal, 0f, vertical);
+    Vector3 direction = Quaternion.AngleAxis(45, Vector3.up) * new Vector3(horizontal, 0f, vertical).normalized;
     
 
     if (direction.magnitude >= 0.1f)
