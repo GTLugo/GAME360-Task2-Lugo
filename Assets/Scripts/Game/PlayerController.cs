@@ -1,18 +1,39 @@
 using UnityEngine;
 
+public class PlayerInput
+{
+  public Vector3 direction;
+
+  public PlayerInput()
+  {
+    // Get input from keyboard
+    if (Input.GetKeyDown(KeyCode.Escape))
+    {
+      Application.Quit();
+    }
+
+    float horizontal = Input.GetAxisRaw("Horizontal"); // A/D or Left/Right arrows
+    float vertical = Input.GetAxisRaw("Vertical");     // W/S or Up/Down arrows
+
+    // Create movement vector
+    direction = Quaternion.AngleAxis(45, Vector3.up) * new Vector3(horizontal, 0f, vertical).normalized;
+  }
+}
+
 public class PlayerController : MonoBehaviour
 {
   [Header("Movement Settings")]
   public float moveSpeed = 5f;
   public float turnTime = 0.1f;
-  float turnSpeed;
+  public float turnSpeed;
 
   [Header("Components")]
   public CharacterController controller;
 
   [Header("Game Stats")]
+  public State state;
   public int Score { get; private set; }
-  [SerializeField] private int targetScore = 200;
+  public int targetScore = 200;
   public GameEventInt scoreChanged;
   public GameEventVector collectedCoin;
   public GameEventVector won;
@@ -20,39 +41,19 @@ public class PlayerController : MonoBehaviour
   // Called before the first frame update
   void Start()
   {
+    state = new IdleState(this);
     Debug.Log("PlayerController Start - Game beginning with score: " + Score);
   }
 
   // Called once per frame
   void Update()
   {
-    HandleMovement();
-
-    if (Input.GetKeyDown(KeyCode.Escape))
-    {
-      Application.Quit();
-    }
+    state.Update(new());
   }
 
-  // New movement handling based on Brackeys' Third Person Movement tutorial: https://youtu.be/4HpC--2iowE
-  void HandleMovement()
-  {
-    // Get input from keyboard
-    float horizontal = Input.GetAxisRaw("Horizontal"); // A/D or Left/Right arrows
-    float vertical = Input.GetAxisRaw("Vertical");     // W/S or Up/Down arrows
-
-    // Create movement vector
-    Vector3 direction = Quaternion.AngleAxis(45, Vector3.up) * new Vector3(horizontal, 0f, vertical).normalized;
-
-
-    if (direction.magnitude >= 0.1f)
-    {
-      float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-      float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSpeed, turnTime);
-      transform.rotation = Quaternion.Euler(0f, angle, 0f);
-
-      controller.Move(direction * moveSpeed * Time.deltaTime);
-    }
+  public void Transition(State next) {
+    next.Enter();
+    state = next;
   }
 
   // Public method to add score
@@ -84,11 +85,6 @@ public class PlayerController : MonoBehaviour
         if (scoreChanged != null)
         {
           scoreChanged.Trigger(Score);
-        }
-
-        if (Score >= targetScore && won != null)
-        {
-          won.Trigger(transform.position);
         }
 
         // Log collection

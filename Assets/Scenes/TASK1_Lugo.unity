@@ -2413,6 +2413,7 @@ GameObject:
   - component: {fileID: 809760554}
   - component: {fileID: 809760555}
   - component: {fileID: 809760556}
+  - component: {fileID: 809760557}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -2448,6 +2449,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreObject: {fileID: 290435682}
+  wonObject: {fileID: 123026218}
 --- !u!114 &809760556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2467,6 +2469,34 @@ MonoBehaviour:
       - m_Target: {fileID: 809760555}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: UpdateScore
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &809760557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809760553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26e99254cd0d5364f91fa0b1ed3da906, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: cf1c65bfba9b99a4fb8c846142337115, type: 2}
+  unityEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 809760555}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: Won
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3825,6 +3855,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   turnTime: 0.1
+  turnSpeed: 0
   controller: {fileID: 1462055171}
   targetScore: 200
   scoreChanged: {fileID: 11400000, guid: ebffbde5b03db854caccdb99cce0b525, type: 2}

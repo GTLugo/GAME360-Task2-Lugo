@@ -8,6 +8,8 @@ public class UIManager : MonoBehaviour
   public GameObject scoreObject;
   private TextMeshProUGUI scoreText;
 
+  public GameObject wonObject;
+
   void Awake()
   {
     if (self == null)
@@ -32,5 +34,10 @@ public class UIManager : MonoBehaviour
   public void UpdateScore(int value)
   {
     scoreText.text = "Score: " + value;
+  }
+
+  public void Won(Vector3 _)
+  {
+    wonObject.SetActive(true);
   }
 }
