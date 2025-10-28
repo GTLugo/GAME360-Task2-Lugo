@@ -23,6 +23,11 @@ public class PlayerController : MonoBehaviour
   void Update()
   {
     HandleMovement();
+
+    if (Input.GetKeyDown(KeyCode.Escape))
+    {
+      Application.Quit();
+    }
   }
 
   // New movement handling based on Brackeys' Third Person Movement tutorial: https://youtu.be/4HpC--2iowE
@@ -34,8 +39,8 @@ public class PlayerController : MonoBehaviour
 
     // Create movement vector
     Vector3 direction = Quaternion.AngleAxis(45, Vector3.up) * new Vector3(horizontal, 0f, vertical).normalized;
-    
 
+    
     if (direction.magnitude >= 0.1f)
     {
       float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
