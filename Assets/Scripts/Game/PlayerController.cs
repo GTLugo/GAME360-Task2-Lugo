@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerInput
@@ -41,7 +42,7 @@ public class PlayerController : MonoBehaviour
   // Called before the first frame update
   void Start()
   {
-    state = new IdleState(this);
+    Transition<IdleState>();
     Debug.Log("PlayerController Start - Game beginning with score: " + Score);
   }
 
@@ -51,9 +52,11 @@ public class PlayerController : MonoBehaviour
     state.Update(new());
   }
 
-  public void Transition(State next) {
-    next.Enter();
-    state = next;
+  public void Transition<T>() where T : State, new()
+  {
+    state = new T();
+    state.player = this;
+    state.Enter();
   }
 
   // Public method to add score

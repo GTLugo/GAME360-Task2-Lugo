@@ -2,9 +2,7 @@ using UnityEngine;
 
 public abstract class State
 {
-  protected PlayerController player;
-
-  public State(PlayerController player) => this.player = player;
+  internal PlayerController player;
 
   public virtual void Enter() {}
 

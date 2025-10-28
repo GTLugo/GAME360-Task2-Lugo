@@ -2,10 +2,6 @@ using UnityEngine;
 
 class IdleState : State
 {
-  public IdleState(PlayerController player) : base(player)
-  {
-  }
-
   public override void Enter()
   {
     Debug.Log("Player is Idle");
@@ -15,12 +11,14 @@ class IdleState : State
   {
     if (input.direction.magnitude >= 0.1f)
     {
-      player.state = new MovingState(player);
+      player.Transition<MovingState>();
+      return;
     }
 
-    if (player.Score >= player.targetScore && player.won != null)
+    if (player.Score >= player.targetScore)
     {
-      player.state = new WonState(player);
+      player.Transition<WonState>();
+      return;
     }
   }
 }
