@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
 
   [Header("Game Stats")]
   public int Score { get; private set; }
+  public GameEventInt scoreChanged;
 
   // Called before the first frame update
   void Start()
@@ -40,7 +41,7 @@ public class PlayerController : MonoBehaviour
     // Create movement vector
     Vector3 direction = Quaternion.AngleAxis(45, Vector3.up) * new Vector3(horizontal, 0f, vertical).normalized;
 
-    
+
     if (direction.magnitude >= 0.1f)
     {
       float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
@@ -52,9 +53,37 @@ public class PlayerController : MonoBehaviour
   }
 
   // Public method to add score
-  public void AddScore(int points)
+  void AddScore(int points)
   {
     Score += points;
     Debug.Log("SCORE UPDATED: " + Score);
+  }
+
+  // Called when another collider enters this trigger collider
+  void OnTriggerEnter(Collider other)
+  {
+    // Check if a coin touched the player
+    if (other.CompareTag("Coin"))
+    {
+      // Get the PlayerController component
+
+      if (other.TryGetComponent<Collectible>(out var coin))
+      {
+        // Add score to player
+        AddScore(coin.scoreValue);
+
+        // Trigger event
+        if (scoreChanged != null)
+        {
+          scoreChanged.Trigger(Score);
+        }
+
+        // Log collection
+        Debug.Log("COLLECTED: " + gameObject.name + " for " + coin.scoreValue + " points!");
+
+        // Destroy the coin
+        Destroy(other.gameObject);
+      }
+    }
   }
 }

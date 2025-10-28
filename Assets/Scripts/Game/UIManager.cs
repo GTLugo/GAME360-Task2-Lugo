@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -8,9 +7,6 @@ public class UIManager : MonoBehaviour
 
   public GameObject scoreObject;
   private TextMeshProUGUI scoreText;
-
-  public GameObject playerObject;
-  private PlayerController playerController;
 
   void Awake()
   {
@@ -25,18 +21,16 @@ public class UIManager : MonoBehaviour
     }
 
     scoreText = scoreObject.GetComponent<TextMeshProUGUI>();
-    playerController = playerObject.GetComponent<PlayerController>();
 
     Debug.Log(scoreText);
-    Debug.Log(playerController);
   }
 
   void Start()
   {
   }
 
-  void Update()
+  public void UpdateScore(int value)
   {
-    scoreText.text = "Score: " + playerController.Score;
+    scoreText.text = "Score: " + value;
   }
 }

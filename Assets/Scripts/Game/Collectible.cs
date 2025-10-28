@@ -16,27 +16,4 @@ public class Collectible : MonoBehaviour
     // Rotate the collectible for visual appeal
     transform.Rotate(Vector3.left * rotationSpeed * Time.deltaTime);
   }
-
-  // Called when another collider enters this trigger collider
-  void OnTriggerEnter(Collider other)
-  {
-    // Check if the player touched this collectible
-    if (other.CompareTag("Player"))
-    {
-      // Get the PlayerController component
-      PlayerController player = other.GetComponent<PlayerController>();
-
-      if (player != null)
-      {
-        // Add score to player
-        player.AddScore(scoreValue);
-
-        // Log collection
-        Debug.Log("COLLECTED: " + gameObject.name + " for " + scoreValue + " points!");
-
-        // Destroy this collectible
-        Destroy(gameObject);
-      }
-    }
-  }
 }
