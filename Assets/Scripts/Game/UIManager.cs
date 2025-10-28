@@ -21,7 +21,7 @@ public class UIManager : MonoBehaviour
     else
     {
       Destroy(gameObject);
-      Debug.LogError("Extra ui manager");
+      Debug.LogError("Extra " + GetType().Name);
     }
 
     scoreText = scoreObject.GetComponent<TextMeshProUGUI>();

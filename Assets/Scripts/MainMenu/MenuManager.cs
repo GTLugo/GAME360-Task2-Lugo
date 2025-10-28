@@ -16,7 +16,7 @@ public class MenuManager : MonoBehaviour
     else
     {
       Destroy(gameObject);
-      Debug.LogError("Extra menu manager");
+      Debug.LogError("Extra " + GetType().Name);
     }
   }
 
