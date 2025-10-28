@@ -4,31 +4,14 @@ public class PlayerController : MonoBehaviour
 {
   [Header("Movement Settings")]
   public float moveSpeed = 5f;
-  public float jumpForce = 7f;
+  public float turnTime = 0.1f;
+  float turnSpeed;
 
   [Header("Components")]
-  private Rigidbody rb;
-  private bool isGrounded = false;
+  public CharacterController controller;
 
   [Header("Game Stats")]
-  public int Score { get; private set;  }
-
-  // Called when script instance is being loaded
-  void Awake()
-  {
-    // Get the Rigidbody component attached to this GameObject
-    rb = GetComponent<Rigidbody>();
-
-    // Verify component was found
-    if (rb == null)
-    {
-      Debug.LogError("No Rigidbody found on Player!");
-    }
-    else
-    {
-      Debug.Log("PlayerController Awake - Rigidbody initialized");
-    }
-  }
+  public int Score { get; private set; }
 
   // Called before the first frame update
   void Start()
@@ -40,50 +23,26 @@ public class PlayerController : MonoBehaviour
   void Update()
   {
     HandleMovement();
-    HandleJumping();
   }
 
+  // New movement handling based on Brackeys' Third Person Movement tutorial: https://youtu.be/4HpC--2iowE
   void HandleMovement()
   {
     // Get input from keyboard
-    float horizontal = Input.GetAxis("Horizontal"); // A/D or Left/Right arrows
-    float vertical = Input.GetAxis("Vertical");     // W/S or Up/Down arrows
+    float horizontal = Input.GetAxisRaw("Horizontal"); // A/D or Left/Right arrows
+    float vertical = Input.GetAxisRaw("Vertical");     // W/S or Up/Down arrows
 
     // Create movement vector
-    Vector3 movement = new Vector3(horizontal, 0f, vertical);
-    movement = movement.normalized * moveSpeed * Time.deltaTime;
+    Vector3 direction = Quaternion.AngleAxis(45, Vector3.up) * new Vector3(horizontal, 0f, vertical);
+    
 
-    // Apply movement
-    transform.Translate(movement, Space.World);
-  }
-
-  void HandleJumping()
-  {
-    // Check for jump input
-    if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+    if (direction.magnitude >= 0.1f)
     {
-      rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-      Debug.Log("Player jumped!");
-    }
-  }
+      float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+      float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSpeed, turnTime);
+      transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
-  // Called when this collider/rigidbody has begun touching another
-  void OnCollisionEnter(Collision collision)
-  {
-    if (collision.gameObject.CompareTag("Ground"))
-    {
-      isGrounded = true;
-      Debug.Log("Player landed on ground");
-    }
-  }
-
-  // Called when this collider/rigidbody has stopped touching another
-  void OnCollisionExit(Collision collision)
-  {
-    if (collision.gameObject.CompareTag("Ground"))
-    {
-      isGrounded = false;
-      Debug.Log("Player left ground");
+      controller.Move(direction * moveSpeed * Time.deltaTime);
     }
   }
 
