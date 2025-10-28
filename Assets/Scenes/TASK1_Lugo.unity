@@ -3826,7 +3826,10 @@ MonoBehaviour:
   moveSpeed: 5
   turnTime: 0.1
   controller: {fileID: 1462055171}
+  targetScore: 200
   scoreChanged: {fileID: 11400000, guid: ebffbde5b03db854caccdb99cce0b525, type: 2}
+  collectedCoin: {fileID: 11400000, guid: 4db92db317252ab4a87123335fa53fef, type: 2}
+  won: {fileID: 11400000, guid: cf1c65bfba9b99a4fb8c846142337115, type: 2}
 --- !u!143 &1462055171
 CharacterController:
   m_ObjectHideFlags: 0
@@ -4365,6 +4368,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1937918929}
   - component: {fileID: 1937918930}
+  - component: {fileID: 1937918932}
+  - component: {fileID: 1937918931}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -4400,6 +4405,64 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundSource: {fileID: 2597180945183033074, guid: db73da96026e8364ea6325d4295487e8, type: 3}
+  collectedCoin: {fileID: 8300000, guid: f28d79a7ce6c4e0408fc8f93b69ee55f, type: 3}
+  won: {fileID: 8300000, guid: 89cea28fed1b6df4182c60882c2086ed, type: 3}
+--- !u!114 &1937918931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1937918928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26e99254cd0d5364f91fa0b1ed3da906, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: cf1c65bfba9b99a4fb8c846142337115, type: 2}
+  unityEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1937918930}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: Won
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1937918932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1937918928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26e99254cd0d5364f91fa0b1ed3da906, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 4db92db317252ab4a87123335fa53fef, type: 2}
+  unityEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1937918930}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: CollectedCoin
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2007209911
 GameObject:
   m_ObjectHideFlags: 0

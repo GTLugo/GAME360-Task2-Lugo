@@ -12,7 +12,10 @@ public class PlayerController : MonoBehaviour
 
   [Header("Game Stats")]
   public int Score { get; private set; }
+  [SerializeField] private int targetScore = 200;
   public GameEventInt scoreChanged;
+  public GameEventVector collectedCoin;
+  public GameEventVector won;
 
   // Called before the first frame update
   void Start()
@@ -72,10 +75,20 @@ public class PlayerController : MonoBehaviour
         // Add score to player
         AddScore(coin.scoreValue);
 
-        // Trigger event
+        // Trigger events
+        if (collectedCoin != null)
+        {
+          collectedCoin.Trigger(transform.position);
+        }
+
         if (scoreChanged != null)
         {
           scoreChanged.Trigger(Score);
+        }
+
+        if (Score >= targetScore && won != null)
+        {
+          won.Trigger(transform.position);
         }
 
         // Log collection

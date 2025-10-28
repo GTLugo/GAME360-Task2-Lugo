@@ -7,6 +7,8 @@ public class AudioManager : MonoBehaviour
   public static AudioManager self;
 
   [SerializeField] private AudioSource soundSource;
+  [SerializeField] private AudioClip collectedCoin;
+  [SerializeField] private AudioClip won;
 
   void Awake()
   {
@@ -21,9 +23,19 @@ public class AudioManager : MonoBehaviour
     }
   }
 
-  public void PlaySound(AudioClip audioClip, Vector3 spawnPoint, float volume)
+  public void CollectedCoin(Vector3 position)
   {
-    AudioSource audioSource = Instantiate(soundSource, spawnPoint, Quaternion.identity);
+    PlaySound(collectedCoin, position, 0.75f);
+  }
+  
+  public void Won(Vector3 position)
+  {
+    PlaySound(won, position, 0.75f);
+  }
+
+  void PlaySound(AudioClip audioClip, Vector3 position, float volume)
+  {
+    AudioSource audioSource = Instantiate(soundSource, position, Quaternion.identity);
     audioSource.clip = audioClip;
     audioSource.volume = volume;
 
