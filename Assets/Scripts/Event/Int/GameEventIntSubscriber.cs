@@ -3,26 +3,26 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class GameEventIntSubscriber : MonoBehaviour
-{
-  [SerializeField] GameEventInt gameEvent;
-  [SerializeField] UnityEvent<int> unityEvent;
+namespace Event.Int {
+  public class GameEventIntSubscriber : MonoBehaviour {
+    [SerializeField] private GameEventInt gameEvent;
 
-  void Awake()
-  {
-    if (gameEvent != null)
-    {
-      gameEvent.Subscribe(this);
+    [SerializeField] private UnityEvent<int> unityEvent;
+
+    private void Awake() {
+      if (gameEvent) {
+        gameEvent.Subscribe(this);
+      }
+    }
+
+    private void OnDestroy() {
+      if (gameEvent) {
+        gameEvent.Unsubscribe(this);
+      }
+    }
+
+    public void Trigger(int value) {
+      unityEvent?.Invoke(value);
     }
   }
-
-  void OnDestroy()
-  {
-    if (gameEvent != null)
-    {
-      gameEvent.Unsubscribe(this);
-    }
-  }
-
-  public void Trigger(int value) => unityEvent?.Invoke(value);
 }

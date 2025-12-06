@@ -3,26 +3,26 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class GameEventVectorSubscriber : MonoBehaviour
-{
-  [SerializeField] GameEventVector gameEvent;
-  [SerializeField] UnityEvent<Vector3> unityEvent;
+namespace Event.Vector {
+  public class GameEventVectorSubscriber : MonoBehaviour {
+    [SerializeField] private GameEventVector gameEvent;
 
-  void Awake()
-  {
-    if (gameEvent != null)
-    {
-      gameEvent.Subscribe(this);
+    [SerializeField] private UnityEvent<Vector3> unityEvent;
+
+    private void Awake() {
+      if (gameEvent) {
+        gameEvent.Subscribe(this);
+      }
+    }
+
+    private void OnDestroy() {
+      if (gameEvent) {
+        gameEvent.Unsubscribe(this);
+      }
+    }
+
+    public void Trigger(Vector3 value) {
+      unityEvent?.Invoke(value);
     }
   }
-
-  void OnDestroy()
-  {
-    if (gameEvent != null)
-    {
-      gameEvent.Unsubscribe(this);
-    }
-  }
-
-  public void Trigger(Vector3 value) => unityEvent?.Invoke(value);
 }

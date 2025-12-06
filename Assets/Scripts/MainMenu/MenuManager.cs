@@ -1,32 +1,27 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MenuManager : MonoBehaviour
-{
-  public static MenuManager self;
+namespace MainMenu {
+  public class MenuManager : MonoBehaviour {
+    private static MenuManager s_self;
 
-  public string gameScene;
+    public string gameScene;
 
-  void Awake()
-  {
-    if (self == null)
-    {
-      self = this;
+    private void Awake() {
+      if (s_self == null) {
+        s_self = this;
+      } else {
+        Destroy(gameObject);
+        Logger.LogError($"Extra {GetType().Name}");
+      }
     }
-    else
-    {
-      Destroy(gameObject);
-      Debug.LogError("Extra " + GetType().Name);
+
+    public void StartGame() {
+      SceneManager.LoadScene(gameScene);
     }
-  }
 
-  public void StartGame()
-  {
-    SceneManager.LoadScene(gameScene);
-  }
-
-  public void QuitGame()
-  {
-    Application.Quit();
+    public void QuitGame() {
+      Application.Quit();
+    }
   }
 }

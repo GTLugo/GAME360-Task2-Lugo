@@ -1,19 +1,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "GameEvent/Integer", fileName = "New Game Event")]
-public class GameEventInt : ScriptableObject
-{
-  readonly HashSet<GameEventIntSubscriber> subscribers = new();
+namespace Event.Int {
+  [CreateAssetMenu(menuName = "GameEvent/Integer", fileName = "New Game Event")]
+  public class GameEventInt : ScriptableObject {
+    private readonly HashSet<GameEventIntSubscriber> _subscribers = new();
 
-  public void Trigger(int value)
-  {
-    foreach (var subscriber in subscribers)
-    {
-      subscriber.Trigger(value);
+    public void Trigger(int value) {
+      foreach (var subscriber in _subscribers) {
+        subscriber.Trigger(value);
+      }
+    }
+
+    public void Subscribe(GameEventIntSubscriber subscriber) {
+      _subscribers.Add(subscriber);
+    }
+
+    public void Unsubscribe(GameEventIntSubscriber subscriber) {
+      _subscribers.Remove(subscriber);
     }
   }
-
-  public void Subscribe(GameEventIntSubscriber subscriber) => subscribers.Add(subscriber);
-  public void Unsubscribe(GameEventIntSubscriber subscriber) => subscribers.Remove(subscriber);
 }

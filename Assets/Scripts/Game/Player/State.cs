@@ -1,10 +1,9 @@
-using UnityEngine;
+namespace Game.Player {
+  public abstract class State {
+    internal PlayerController player;
 
-public abstract class State
-{
-  internal PlayerController player;
+    public virtual void Enter() { }
 
-  public virtual void Enter() {}
-
-  public abstract void Update(PlayerInput input);
+    public abstract void Update(PlayerInput input);
+  }
 }

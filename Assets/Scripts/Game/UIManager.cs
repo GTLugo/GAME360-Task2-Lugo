@@ -1,43 +1,33 @@
 using TMPro;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
-{
-  public static UIManager self;
+namespace Game {
+  public class UIManager : MonoBehaviour {
+    private static UIManager s_self;
 
-  public GameObject scoreObject;
-  private TextMeshProUGUI scoreText;
+    public GameObject scoreObject;
+    public GameObject wonObject;
+    private TextMeshProUGUI _scoreText;
 
-  public GameObject wonObject;
+    private void Awake() {
+      if (!s_self) {
+        s_self = this;
+      } else {
+        Destroy(gameObject);
+        Logger.LogError($"Extra {GetType().Name}");
+      }
 
-  void Awake()
-  {
-    if (self == null)
-    {
-      self = this;
+      _scoreText = scoreObject.GetComponent<TextMeshProUGUI>();
+
+      Logger.Log(_scoreText);
     }
-    else
-    {
-      Destroy(gameObject);
-      Debug.LogError("Extra " + GetType().Name);
+
+    public void UpdateScore(int value) {
+      _scoreText.text = $"Score: {value}";
     }
 
-    scoreText = scoreObject.GetComponent<TextMeshProUGUI>();
-
-    Debug.Log(scoreText);
-  }
-
-  void Start()
-  {
-  }
-
-  public void UpdateScore(int value)
-  {
-    scoreText.text = "Score: " + value;
-  }
-
-  public void Won(Vector3 _)
-  {
-    wonObject.SetActive(true);
+    public void Won(Vector3 _) {
+      wonObject.SetActive(true);
+    }
   }
 }

@@ -1,19 +1,20 @@
 using UnityEngine;
 
-public class Collectible : MonoBehaviour
-{
-  [Header("Collectible Settings")]
-  public int scoreValue = 10;
-  public float rotationSpeed = 100f;
+namespace Game {
+  public class Collectible : MonoBehaviour {
+    [Header("Collectible Settings")] public int scoreValue = 10;
 
-  void Start()
-  {
-    Debug.Log("Collectible created: " + gameObject.name + " worth " + scoreValue + " points");
-  }
+    public float rotationSpeed = 100f;
 
-  void Update()
-  {
-    // Rotate the collectible for visual appeal
-    transform.Rotate(Vector3.left * rotationSpeed * Time.deltaTime);
+    public Transform mesh;
+
+    private void Start() {
+      Logger.Log($"Collectible created: {gameObject.name} worth {scoreValue} points");
+    }
+
+    private void Update() {
+      // Rotate the collectible for visual appeal
+      mesh.Rotate(Vector3.left * (rotationSpeed * Time.deltaTime));
+    }
   }
 }

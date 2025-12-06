@@ -2,46 +2,42 @@
 
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour
-{
-  public static AudioManager self;
+namespace Game {
+  public class AudioManager : MonoBehaviour {
+    private static AudioManager s_self;
 
-  [SerializeField] private AudioSource soundSource;
-  [SerializeField] private AudioClip collectedCoin;
-  [SerializeField] private AudioClip won;
+    [SerializeField] private AudioSource soundSourcePrefab;
 
-  void Awake()
-  {
-    if (self == null)
-    {
-      self = this;
+    [SerializeField] private AudioClip collectedCoin;
+
+    [SerializeField] private AudioClip won;
+
+    private void Awake() {
+      if (!s_self) {
+        s_self = this;
+      } else {
+        Destroy(gameObject);
+        Logger.LogError($"Extra {GetType().Name}");
+      }
     }
-    else
-    {
-      Destroy(gameObject);
-      Debug.LogError("Extra " + GetType().Name);
+
+    public void CollectedCoin(Vector3 position) {
+      PlaySound(collectedCoin, position, 0.75f);
     }
-  }
 
-  public void CollectedCoin(Vector3 position)
-  {
-    PlaySound(collectedCoin, position, 0.75f);
-  }
-  
-  public void Won(Vector3 position)
-  {
-    PlaySound(won, position, 0.75f);
-  }
+    public void Won(Vector3 position) {
+      PlaySound(won, position, 0.75f);
+    }
 
-  void PlaySound(AudioClip audioClip, Vector3 position, float volume)
-  {
-    AudioSource audioSource = Instantiate(soundSource, position, Quaternion.identity);
-    audioSource.clip = audioClip;
-    audioSource.volume = volume;
+    private void PlaySound(AudioClip audioClip, Vector3 position, float volume) {
+      var audioSource = Instantiate(soundSourcePrefab, position, Quaternion.identity);
+      audioSource.clip = audioClip;
+      audioSource.volume = volume;
 
-    audioSource.Play();
+      audioSource.Play();
 
-    float clipLength = audioSource.clip.length;
-    Destroy(audioSource.gameObject, clipLength);
+      var clipLength = audioSource.clip.length;
+      Destroy(audioSource.gameObject, clipLength);
+    }
   }
 }
