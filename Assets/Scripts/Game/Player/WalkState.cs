@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Game.Player {
   internal class WalkState : State {
-    public override void Enter() {
+    protected override void Enter() {
       Logger.Log($"Player `{this.Player.name}` is Walking");
     }
 

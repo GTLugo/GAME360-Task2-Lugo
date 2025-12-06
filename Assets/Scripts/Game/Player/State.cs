@@ -2,7 +2,7 @@ namespace Game.Player {
   public abstract class State {
     protected PlayerController Player { get; private set; }
 
-    public virtual void Enter() { }
+    protected virtual void Enter() { }
 
     public abstract void Update(PlayerInput input);
 

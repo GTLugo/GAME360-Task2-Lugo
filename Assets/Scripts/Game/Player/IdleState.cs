@@ -1,6 +1,6 @@
 namespace Game.Player {
   internal class IdleState : State {
-    public override void Enter() {
+    protected override void Enter() {
       Logger.Log($"Player `{this.Player.name}` is Idle");
     }
 
