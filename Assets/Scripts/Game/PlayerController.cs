@@ -17,7 +17,7 @@ namespace Game {
       var vertical = Input.GetAxisRaw("Vertical"); // W/S or Up/Down arrows
 
       // Create movement vector
-      direction = Quaternion.AngleAxis(45, Vector3.up) * new Vector3(horizontal, 0f, vertical).normalized;
+      this.direction = Quaternion.AngleAxis(45, Vector3.up) * new Vector3(horizontal, 0f, vertical).normalized;
     }
   }
 
@@ -34,18 +34,18 @@ namespace Game {
     public GameEventVector collectedCoin;
     public GameEventVector won;
 
-    private State _state;
+    public State State { get; set; }
     public int Score { get; private set; }
 
     // Called before the first frame update
     private void Start() {
-      Transition<IdleState>();
-      Logger.Log("PlayerController Start - Game beginning with score: " + Score);
+      this.State = State.Init(this);
+      Logger.Log("PlayerController Start - Game beginning with score: " + this.Score);
     }
 
     // Called once per frame
     private void Update() {
-      _state.Update(new PlayerInput());
+      this.State.Update(new PlayerInput());
     }
 
     // Called when another collider enters this trigger collider
@@ -61,34 +61,28 @@ namespace Game {
       }
 
       // Add score to player
-      AddScore(coin.scoreValue);
+      this.AddScore(coin.scoreValue);
 
       // Trigger events
-      if (collectedCoin != null) {
-        collectedCoin.Trigger(transform.position);
+      if (this.collectedCoin != null) {
+        this.collectedCoin.Trigger(this.transform.position);
       }
 
-      if (scoreChanged != null) {
-        scoreChanged.Trigger(Score);
+      if (this.scoreChanged != null) {
+        this.scoreChanged.Trigger(this.Score);
       }
 
       // Log collection
-      Debug.Log("COLLECTED: " + gameObject.name + " for " + coin.scoreValue + " points!");
+      Debug.Log("COLLECTED: " + this.gameObject.name + " for " + coin.scoreValue + " points!");
 
       // Destroy the coin
       Destroy(other.gameObject);
     }
 
-    public void Transition<T>() where T : State, new() {
-      _state = new T();
-      _state.player = this;
-      _state.Enter();
-    }
-
     // Public method to add score
     private void AddScore(int points) {
-      Score += points;
-      Logger.Log("SCORE UPDATED: " + Score);
+      this.Score += points;
+      Logger.Log("SCORE UPDATED: " + this.Score);
     }
   }
 }

@@ -11,13 +11,13 @@ namespace MainMenu {
       if (s_self == null) {
         s_self = this;
       } else {
-        Destroy(gameObject);
-        Logger.LogError($"Extra {GetType().Name}");
+        Destroy(this.gameObject);
+        Logger.LogError($"Extra {this.GetType().Name}");
       }
     }
 
     public void StartGame() {
-      SceneManager.LoadScene(gameScene);
+      SceneManager.LoadScene(this.gameScene);
     }
 
     public void QuitGame() {

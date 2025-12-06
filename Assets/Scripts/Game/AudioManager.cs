@@ -16,21 +16,21 @@ namespace Game {
       if (!s_self) {
         s_self = this;
       } else {
-        Destroy(gameObject);
-        Logger.LogError($"Extra {GetType().Name}");
+        Destroy(this.gameObject);
+        Logger.LogError($"Extra {this.GetType().Name}");
       }
     }
 
     public void CollectedCoin(Vector3 position) {
-      PlaySound(collectedCoin, position, 0.75f);
+      this.PlaySound(this.collectedCoin, position, 0.75f);
     }
 
     public void Won(Vector3 position) {
-      PlaySound(won, position, 0.75f);
+      this.PlaySound(this.won, position, 0.75f);
     }
 
     private void PlaySound(AudioClip audioClip, Vector3 position, float volume) {
-      var audioSource = Instantiate(soundSourcePrefab, position, Quaternion.identity);
+      var audioSource = Instantiate(this.soundSourcePrefab, position, Quaternion.identity);
       audioSource.clip = audioClip;
       audioSource.volume = volume;
 

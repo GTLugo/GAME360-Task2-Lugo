@@ -7,17 +7,17 @@ namespace Event.Vector {
     private readonly HashSet<GameEventVectorSubscriber> _subscribers = new();
 
     public void Trigger(Vector3 value) {
-      foreach (var subscriber in _subscribers) {
+      foreach (var subscriber in this._subscribers) {
         subscriber.Trigger(value);
       }
     }
 
     public void Subscribe(GameEventVectorSubscriber subscriber) {
-      _subscribers.Add(subscriber);
+      this._subscribers.Add(subscriber);
     }
 
     public void Unsubscribe(GameEventVectorSubscriber subscriber) {
-      _subscribers.Remove(subscriber);
+      this._subscribers.Remove(subscriber);
     }
   }
 }

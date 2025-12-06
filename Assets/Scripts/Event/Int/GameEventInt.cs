@@ -7,17 +7,17 @@ namespace Event.Int {
     private readonly HashSet<GameEventIntSubscriber> _subscribers = new();
 
     public void Trigger(int value) {
-      foreach (var subscriber in _subscribers) {
+      foreach (var subscriber in this._subscribers) {
         subscriber.Trigger(value);
       }
     }
 
     public void Subscribe(GameEventIntSubscriber subscriber) {
-      _subscribers.Add(subscriber);
+      this._subscribers.Add(subscriber);
     }
 
     public void Unsubscribe(GameEventIntSubscriber subscriber) {
-      _subscribers.Remove(subscriber);
+      this._subscribers.Remove(subscriber);
     }
   }
 }

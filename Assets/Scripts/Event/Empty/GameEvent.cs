@@ -9,17 +9,17 @@ namespace Event.Empty {
     private readonly HashSet<GameEventSubscriber> _subscribers = new();
 
     public void Trigger() {
-      foreach (var subscriber in _subscribers) {
+      foreach (var subscriber in this._subscribers) {
         subscriber.Trigger();
       }
     }
 
     public void Subscribe(GameEventSubscriber subscriber) {
-      _subscribers.Add(subscriber);
+      this._subscribers.Add(subscriber);
     }
 
     public void Unsubscribe(GameEventSubscriber subscriber) {
-      _subscribers.Remove(subscriber);
+      this._subscribers.Remove(subscriber);
     }
   }
 }

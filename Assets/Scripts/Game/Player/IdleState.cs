@@ -1,17 +1,17 @@
 namespace Game.Player {
   internal class IdleState : State {
     public override void Enter() {
-      Logger.Log("Player is Idle");
+      Logger.Log($"Player `{this.Player.name}` is Idle");
     }
 
     public override void Update(PlayerInput input) {
       if (input.direction.magnitude >= 0.1f) {
-        player.Transition<MovingState>();
+        this.Transition<WalkState>();
         return;
       }
 
-      if (player.Score >= player.targetScore) {
-        player.Transition<WonState>();
+      if (this.Player.Score >= this.Player.targetScore) {
+        this.Transition<WonState>();
       }
     }
   }

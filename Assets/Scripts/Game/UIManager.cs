@@ -13,21 +13,21 @@ namespace Game {
       if (!s_self) {
         s_self = this;
       } else {
-        Destroy(gameObject);
-        Logger.LogError($"Extra {GetType().Name}");
+        Destroy(this.gameObject);
+        Logger.LogError($"Extra {this.GetType().Name}");
       }
 
-      _scoreText = scoreObject.GetComponent<TextMeshProUGUI>();
+      this._scoreText = this.scoreObject.GetComponent<TextMeshProUGUI>();
 
-      Logger.Log(_scoreText);
+      Logger.Log(this._scoreText);
     }
 
     public void UpdateScore(int value) {
-      _scoreText.text = $"Score: {value}";
+      this._scoreText.text = $"Score: {value}";
     }
 
     public void Won(Vector3 _) {
-      wonObject.SetActive(true);
+      this.wonObject.SetActive(true);
     }
   }
 }

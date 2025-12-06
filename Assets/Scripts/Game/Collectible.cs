@@ -9,12 +9,12 @@ namespace Game {
     public Transform mesh;
 
     private void Start() {
-      Logger.Log($"Collectible created: {gameObject.name} worth {scoreValue} points");
+      Logger.Log($"Collectible created: {this.gameObject.name} worth {this.scoreValue} points");
     }
 
     private void Update() {
       // Rotate the collectible for visual appeal
-      mesh.Rotate(Vector3.left * (rotationSpeed * Time.deltaTime));
+      this.mesh.Rotate(Vector3.left * (this.rotationSpeed * Time.deltaTime));
     }
   }
 }

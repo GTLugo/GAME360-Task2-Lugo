@@ -10,19 +10,19 @@ namespace Event.Empty {
     [SerializeField] private UnityEvent unityEvent;
 
     private void Awake() {
-      if (gameEvent) {
-        gameEvent.Subscribe(this);
+      if (this.gameEvent) {
+        this.gameEvent.Subscribe(this);
       }
     }
 
     private void OnDestroy() {
-      if (gameEvent) {
-        gameEvent.Unsubscribe(this);
+      if (this.gameEvent) {
+        this.gameEvent.Unsubscribe(this);
       }
     }
 
     public void Trigger() {
-      unityEvent?.Invoke();
+      this.unityEvent?.Invoke();
     }
   }
 }

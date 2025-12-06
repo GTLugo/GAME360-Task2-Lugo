@@ -8,28 +8,28 @@ namespace Game {
 
     private void Start() {
       // Check if target is assigned
-      if (!target) {
+      if (!this.target) {
         Logger.LogWarning("Camera target not set! Please assign the Player.");
       } else {
-        Logger.Log($"Camera following: {target.name}");
+        Logger.Log($"Camera following: {this.target.name}");
       }
     }
 
     // LateUpdate is called after all Update functions
     private void LateUpdate() {
-      if (!target) {
+      if (!this.target) {
         return;
       }
 
       // Calculate desired position
-      var desiredPosition = target.position + offset;
+      var desiredPosition = this.target.position + this.offset;
 
       // Smoothly move to that position
-      var smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
-      transform.position = smoothedPosition;
+      var smoothedPosition = Vector3.Lerp(this.transform.position, desiredPosition, this.smoothSpeed);
+      this.transform.position = smoothedPosition;
 
       // Look at the target
-      transform.LookAt(target);
+      this.transform.LookAt(this.target);
     }
   }
 }
