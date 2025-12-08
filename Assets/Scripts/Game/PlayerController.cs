@@ -93,12 +93,14 @@ namespace Game {
         return;
       }
 
-      if (!Physics.Raycast(
-            mainCamera.ScreenPointToRay(Input.mousePosition),
-            out var hit,
-            100.0f,
-            this.clickableLayers
-          )) {
+      var result = Physics.Raycast(
+        mainCamera.ScreenPointToRay(Input.mousePosition),
+        out var hit,
+        100.0f,
+        this.clickableLayers
+      );
+      
+      if (!result) {
         return;
       }
 
