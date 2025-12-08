@@ -93,20 +93,22 @@ namespace Game {
         return;
       }
 
-      var result = Physics.Raycast(
-        mainCamera.ScreenPointToRay(Input.mousePosition),
-        out var hit,
-        100.0f,
-        this.clickableLayers
-      );
-      
-      if (!result) {
+      var ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+      if (!Physics.Raycast(ray, out var hit, 100.0f, this.clickableLayers)) {
         return;
+      }
+
+      if (Application.isEditor) {
+        Debug.DrawLine(ray.origin, hit.point, Color.green, 0.5f);
       }
 
       this.Agent.destination = hit.point;
       if (this.clickEffect) {
-        Instantiate(this.clickEffect, hit.point += Vector3.up * 0.1f, this.clickEffect.transform.rotation);
+        Instantiate(
+          this.clickEffect,
+          this.Agent.destination += Vector3.up * 0.01f,
+          this.clickEffect.transform.rotation
+        );
       }
     }
 

@@ -934,7 +934,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Move: WASD/Arrow Keys
+  m_text: 'Move: Left-Click
 
     Quit: Esc'
   m_isRightToLeft: 0
@@ -1731,6 +1731,7 @@ GameObject:
   m_Component:
   - component: {fileID: 812459819}
   - component: {fileID: 812459820}
+  - component: {fileID: 812459821}
   m_Layer: 6
   m_Name: Environment
   m_TagString: Untagged
@@ -1790,6 +1791,19 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 161853c46e660ff4b86828faf9cf4996, type: 2}
   m_BuildHeightMesh: 0
+--- !u!114 &812459821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 812459818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bc3c5c1dc084186b1f255202020cb90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.World
+  clickEvent: {fileID: 11400000, guid: afbc8ec1c64922a4dbbc968f513eb74a, type: 2}
 --- !u!1001 &895791227
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2574,6 +2588,7 @@ GameObject:
   - component: {fileID: 1446207779}
   - component: {fileID: 1446207783}
   - component: {fileID: 1446207784}
+  - component: {fileID: 1446207785}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2623,7 +2638,7 @@ Camera:
   near clip plane: 0.01
   far clip plane: 1000
   field of view: 60.000004
-  orthographic: 1
+  orthographic: 0
   orthographic size: 4
   m_Depth: -1
   m_CullingMask:
@@ -2731,6 +2746,22 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   CustomBlends: {fileID: 0}
+--- !u!114 &1446207785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446207778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c49b4cc203aa6414fae5c798d1d0e7d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.PhysicsRaycaster
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 64
+  m_MaxRayIntersections: 0
 --- !u!1 &1453351820
 GameObject:
   m_ObjectHideFlags: 0
@@ -2857,6 +2888,7 @@ GameObject:
   - component: {fileID: 1462055172}
   - component: {fileID: 1462055173}
   - component: {fileID: 1462055174}
+  - component: {fileID: 1462055175}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2893,7 +2925,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yawVelocity: 15
-  clickEffect: {fileID: 0}
+  clickEffect: {fileID: 445215205293414679, guid: 6f854c7eb371b4d4689f28a71de760fc, type: 3}
   clickableLayers:
     serializedVersion: 2
     m_Bits: 64
@@ -2986,6 +3018,34 @@ MonoBehaviour:
   <TargetScore>k__BackingField: 200
   <MoveSpeed>k__BackingField: 5
   turnTime: 0.1
+--- !u!114 &1462055175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1462055166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f19162da9d284ef6bd8188ef8ef1849f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Event.Subscribers.WorldClickSubscriber
+  gameEvent: {fileID: 11400000, guid: afbc8ec1c64922a4dbbc968f513eb74a, type: 2}
+  unityEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1462055168}
+        m_TargetAssemblyTypeName: Game.PlayerController, Assembly-CSharp
+        m_MethodName: ClickToMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1558649011
 GameObject:
   m_ObjectHideFlags: 0
