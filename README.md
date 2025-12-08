@@ -1,58 +1,80 @@
-# Task 3: Complete Patterns Integration
+# Pondering
 
-## Project Evolution
+[Game Banner](Screenshots/banner.png)
 
-## Task 2 Foundation
+## Game Overview
 
-- Singleton Pattern: GameManager, AudioManager
-- Basic game with centralized management
-
-## Task 3 Additions
-
-## Observer Pattern
-
-- GameEvent Scriptable Objects for decoupled communication
-- Events implemented:
-  -- Collected coin
-  -- Scored updated
-  -- Level completed
-- Observers: UIManager, AudioManager
-
-## State Machine Pattern
-
-- Player States:
-  -- Idle
-  -- Moving
-  -- Won
-- Game States: Enhanced from Task 2
-- State transitions:
-  -- Idle -> Moving
-  -- Moving -> Idle
-  -- Idle -> Won
-  -- Moving -> Won
-
-## Key Integration Points
-
-1. Score System: Singleton → Observer → UI
-2. Player Actions: Input → State → Event → Audio
-3. Game Flow: GameState → Events → Scene Changes
-
-## Repository Statistics
-
-- Total Commits: 28
-- Task 3 Commits: 16
-- Lines of Code: ~600
-- Development Time: ~30 hrs
+Genre: **Top-down Puzzle Adventure**  
+Platform: **Windows**  
+Development Time: **1 week**  
+Unity Version: **6.3**  
+Course: **GAME 360 - Development with Game Engines, Fall 2025**
 
 ## How to Play
 
-- Controls:
-  -- Move: WASD / Arrow keys
-  -- Exit: Esc
-- Objective: Collect 200 points
-- New Features:
-  -- Different size coins
-  -- Escape button
-  -- New character controller
-  -- Audio effects
-  
+[Installation and controls]
+
+## Features
+
+[All implemented features]
+
+Implemented Mechanics
+
+- [Core Mechanic 1]
+- [Core Mechanic 2]
+- [Core Mechanic 3]
+- Score/Progress System
+- Power-Ups/Collectibles
+- Enemy AI (if applicable)
+- Multiple Levels/Scenes
+- Win/Lose Conditions
+
+## Architecture
+
+[Pattern implementations/ used in... with purpose]
+
+## Development Statistics
+
+- Total Commits: [number]
+- Development Time: [hours]
+- Lines of Code: [approximate]
+
+## Screenshots
+
+[Screenshot 1](Screenshots/gameplay1.png)
+*Main gameplay showing [feature]*
+
+[Screenshot 2](Screenshots/menu.png)
+*Main menu interface*
+
+[Screenshot 3](Screenshots/victory.png)
+*Victory screen*
+
+## Credits
+
+[All attributions]
+
+- Audio (Music & SFX)
+
+- Art Assets
+
+## Post-Mortem
+
+[Reflection on development]
+
+- What I learned
+
+- Future Improvements [List of features]
+
+ Developer
+
+**[Your Name]**  
+Student ID: [Your ID]  
+Old Dominion University - GAME 360  
+Fall 2025  
+
+Email: [your email]  
+Portfolio: [if applicable]  
+LinkedIn: [if applicable]
+
+----------------------------------------------

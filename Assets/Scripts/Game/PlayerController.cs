@@ -1,51 +1,64 @@
-using Event.Int;
-using Event.Vector;
+using Event;
 using Game.Player;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.InputSystem;
+using State = Game.Player.State;
 
 namespace Game {
-  public class PlayerInput {
-    public Vector3 direction;
-
-    public PlayerInput() {
-      // Get input from keyboard
-      if (Input.GetKeyDown(KeyCode.Escape)) {
-        Application.Quit();
-      }
-
-      var horizontal = Input.GetAxisRaw("Horizontal"); // A/D or Left/Right arrows
-      var vertical = Input.GetAxisRaw("Vertical"); // W/S or Up/Down arrows
-
-      // Create movement vector
-      this.direction = Quaternion.AngleAxis(45, Vector3.up) * new Vector3(horizontal, 0f, vertical).normalized;
-    }
-  }
-
   public class PlayerController : MonoBehaviour {
-    [Header("Movement Settings")] public float moveSpeed = 5f;
+    [Header("Movement")]
+    [DoNotSerialize]
+    public float yawVelocity;
 
-    public float turnTime = 0.1f;
-    public float turnSpeed;
+    [SerializeField]
+    private ParticleSystem clickEffect;
 
-    [Header("Components")] public CharacterController controller;
-    public int targetScore = 200;
+    [SerializeField]
+    private LayerMask clickableLayers;
 
-    public GameEventInt scoreChanged;
-    public GameEventVector collectedCoin;
-    public GameEventVector won;
+    [Header("Components")]
+    public Animator animator;
 
-    public State State { get; set; }
-    public int Score { get; private set; }
+    [Header("Events")]
+    public GameEvent<int> scoreChanged;
+
+    public GameEvent<Vector3> collectedCoin;
+    public GameEvent<Vector3> won;
+
+    public InputActions InputActions { get; private set; }
+    public CharacterController Controller { get; private set; }
+    public PlayerData Data { get; private set; }
+    public NavMeshAgent Agent { get; private set; }
 
     // Called before the first frame update
-    private void Start() {
-      this.State = State.Init(this);
-      Logger.Log("PlayerController Start - Game beginning with score: " + this.Score);
+    private void Awake() {
+      this.InputActions = new InputActions();
+      this.InputActions.Master.Move.performed += this.ClickToMove;
+      this.Controller = this.GetComponent<CharacterController>();
+      this.Data = this.GetComponent<PlayerData>();
+      this.Data.State = State.Init(this);
+      this.Agent = this.GetComponent<NavMeshAgent>();
+
+      Logger.Log($"PlayerController Start - Game beginning with score: {this.Data.Score}");
     }
 
     // Called once per frame
     private void Update() {
-      this.State.Update(new PlayerInput());
+      if (Input.GetKeyDown(KeyCode.Escape)) {
+        Application.Quit();
+      }
+
+      this.Data.State.Update();
+    }
+
+    private void OnEnable() {
+      this.InputActions.Enable();
+    }
+
+    private void OnDisable() {
+      this.InputActions.Disable();
     }
 
     // Called when another collider enters this trigger collider
@@ -55,34 +68,54 @@ namespace Game {
         return;
       }
 
-      // Get the PlayerController component
       if (!other.TryGetComponent<Collectible>(out var coin)) {
         return;
       }
 
       // Add score to player
-      this.AddScore(coin.scoreValue);
+      this.Data.Score += coin.scoreValue;
+      Logger.Log($"SCORE UPDATED: {this.Data.Score}");
 
       // Trigger events
-      if (this.collectedCoin != null) {
-        this.collectedCoin.Trigger(this.transform.position);
-      }
-
-      if (this.scoreChanged != null) {
-        this.scoreChanged.Trigger(this.Score);
-      }
+      this.collectedCoin?.Trigger(coin.transform.position);
+      this.scoreChanged?.Trigger(this.Data.Score);
 
       // Log collection
-      Debug.Log("COLLECTED: " + this.gameObject.name + " for " + coin.scoreValue + " points!");
+      Debug.Log($"COLLECTED: {this.gameObject.name} for {coin.scoreValue} points!");
 
       // Destroy the coin
       Destroy(other.gameObject);
     }
 
-    // Public method to add score
-    private void AddScore(int points) {
-      this.Score += points;
-      Logger.Log("SCORE UPDATED: " + this.Score);
+    private void ClickToMove(InputAction.CallbackContext ctx) {
+      var mainCamera = Camera.main;
+      if (!mainCamera) {
+        return;
+      }
+
+      if (!Physics.Raycast(
+            mainCamera.ScreenPointToRay(Input.mousePosition),
+            out var hit,
+            100.0f,
+            this.clickableLayers
+          )) {
+        return;
+      }
+
+      this.Agent.destination = hit.point;
+      if (this.clickEffect) {
+        Instantiate(this.clickEffect, hit.point += Vector3.up * 0.1f, this.clickEffect.transform.rotation);
+      }
+    }
+
+    public void FaceTarget() {
+      var direction = this.Agent.desiredVelocity.normalized;
+      var lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+      this.transform.rotation = Quaternion.Slerp(
+        this.transform.rotation,
+        lookRotation,
+        Time.deltaTime * this.yawVelocity
+      );
     }
   }
 }
