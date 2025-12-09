@@ -8,6 +8,7 @@ namespace Game.Player {
       this.Player.animator.SetBool(isWalking, false);
       this.Player.won.Trigger(this.Player.transform.position);
       this.Player.InputActions.Disable();
+      
       Logger.Log("Player has won");
     }
 
