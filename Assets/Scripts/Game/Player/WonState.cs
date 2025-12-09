@@ -7,7 +7,7 @@ namespace Game.Player {
     protected override void Enter() {
       this.Player.animator.SetBool(isWalking, false);
       this.Player.won.Trigger(this.Player.transform.position);
-      this.Player.InputActions.Disable();
+      this.Player.InputActions.Master.Disable();
       this.Player.Agent.ResetPath();
       this.Player.Agent.speed = 0;
 

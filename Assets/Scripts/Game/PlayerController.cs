@@ -56,11 +56,11 @@ namespace Game {
     }
 
     private void OnEnable() {
-      this.InputActions.Enable();
+      this.InputActions.Master.Enable();
     }
 
     private void OnDisable() {
-      this.InputActions.Disable();
+      this.InputActions.Master.Disable();
     }
 
     // Called when another collider enters this trigger collider
