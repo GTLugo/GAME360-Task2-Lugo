@@ -10,7 +10,7 @@ namespace Game.Player {
     }
 
     public override void Update() {
-      if (this.Player.Agent.remainingDistance < 0.1f) {
+      if (this.Player.Agent.remainingDistance < this.Player.stopDistance) {
         this.Transition<IdleState>();
         return;
       }
@@ -21,6 +21,15 @@ namespace Game.Player {
       }
 
       this.Player.FaceTarget();
+      if (this.Player.InputActions.Master.Move.IsPressed()) {
+        this.Player.Agent.speed = Mathf.Clamp(
+          this.Player.Agent.remainingDistance * this.Player.speedRampFactor,
+          0.0f,
+          this.Player.Data.MoveSpeed
+        );
+      } else {
+        this.Player.Agent.speed = this.Player.Data.MoveSpeed;
+      }
     }
   }
 }

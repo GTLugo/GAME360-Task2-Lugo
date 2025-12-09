@@ -10,7 +10,7 @@ namespace Game.Player {
     }
 
     public override void Update() {
-      if (this.Player.Agent.remainingDistance >= 0.1f) {
+      if (this.Player.Agent.remainingDistance >= this.Player.stopDistance) {
         this.Transition<WalkState>();
         return;
       }

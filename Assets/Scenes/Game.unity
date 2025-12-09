@@ -2921,7 +2921,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72126689225f9ad409d6d0288f7e6762, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yawVelocity: 15
+  stopDistance: 0.1
+  speedRampFactor: 0.2
+  turnSpeed: 15
   clickEffect: {fileID: 445215205293414679, guid: 6f854c7eb371b4d4689f28a71de760fc, type: 3}
   clickableLayers:
     serializedVersion: 2
