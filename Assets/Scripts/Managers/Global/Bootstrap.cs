@@ -7,4 +7,8 @@ namespace Managers.Global {
       Object.DontDestroyOnLoad(Object.Instantiate(Resources.Load("GlobalManagers")));
     }
   }
+
+  public static class AnimationLibrary {
+    public static readonly int isWalking = Animator.StringToHash("isWalking");
+  }
 }

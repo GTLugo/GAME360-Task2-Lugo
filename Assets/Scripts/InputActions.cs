@@ -89,6 +89,105 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     ""name"": ""InputActions"",
     ""maps"": [
         {
+            ""name"": ""Master"",
+            ""id"": ""a2a2a401-1d55-4f95-add6-413d8473ee52"",
+            ""actions"": [
+                {
+                    ""name"": ""Move (Mouse)"",
+                    ""type"": ""Value"",
+                    ""id"": ""1fb8d064-bc20-4525-9ada-10bfe40725e7"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Move (Gamepad)"",
+                    ""type"": ""Value"",
+                    ""id"": ""240a6810-fca2-41ee-a244-d05672fbcd6b"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Move To Cursor"",
+                    ""type"": ""Button"",
+                    ""id"": ""f2e8f1eb-077e-4471-b419-487c4dd5818a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Quit"",
+                    ""type"": ""Button"",
+                    ""id"": ""41fd091e-70a5-440a-84f2-9eecc3ced5ba"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""37292de9-dcc7-4d0c-9ee6-de8ea9cb8c90"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Move To Cursor"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""95b88be1-1386-4db3-9a72-8173957b06a6"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Quit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a933c78d-6aa3-4087-8a11-501dfc6eeb5c"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Quit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""37b4bed2-e86c-4375-87f3-3c85307d72a0"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Move (Mouse)"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e26ef098-4878-4ba0-8c6e-0fcf32b3bd6e"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Move (Gamepad)"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
             ""name"": ""UI"",
             ""id"": ""272f6d14-89ba-496f-b7ff-215263d3219f"",
             ""actions"": [
@@ -603,54 +702,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
-        },
-        {
-            ""name"": ""Master"",
-            ""id"": ""a2a2a401-1d55-4f95-add6-413d8473ee52"",
-            ""actions"": [
-                {
-                    ""name"": ""Move"",
-                    ""type"": ""Button"",
-                    ""id"": ""f2e8f1eb-077e-4471-b419-487c4dd5818a"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Quit"",
-                    ""type"": ""Button"",
-                    ""id"": ""41fd091e-70a5-440a-84f2-9eecc3ced5ba"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""37292de9-dcc7-4d0c-9ee6-de8ea9cb8c90"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""95b88be1-1386-4db3-9a72-8173957b06a6"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Quit"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
         }
     ],
     ""controlSchemes"": [
@@ -716,6 +767,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         }
     ]
 }");
+        // Master
+        m_Master = asset.FindActionMap("Master", throwIfNotFound: true);
+        m_Master_MoveMouse = m_Master.FindAction("Move (Mouse)", throwIfNotFound: true);
+        m_Master_MoveGamepad = m_Master.FindAction("Move (Gamepad)", throwIfNotFound: true);
+        m_Master_MoveToCursor = m_Master.FindAction("Move To Cursor", throwIfNotFound: true);
+        m_Master_Quit = m_Master.FindAction("Quit", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -728,16 +785,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_UI_ScrollWheel = m_UI.FindAction("ScrollWheel", throwIfNotFound: true);
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
-        // Master
-        m_Master = asset.FindActionMap("Master", throwIfNotFound: true);
-        m_Master_Move = m_Master.FindAction("Move", throwIfNotFound: true);
-        m_Master_Quit = m_Master.FindAction("Quit", throwIfNotFound: true);
     }
 
     ~@InputActions()
     {
-        UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, InputActions.UI.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_Master.enabled, "This will cause a leak and performance issues, InputActions.Master.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, InputActions.UI.Disable() has not been called.");
     }
 
     /// <summary>
@@ -809,6 +862,135 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     {
         return asset.FindBinding(bindingMask, out action);
     }
+
+    // Master
+    private readonly InputActionMap m_Master;
+    private List<IMasterActions> m_MasterActionsCallbackInterfaces = new List<IMasterActions>();
+    private readonly InputAction m_Master_MoveMouse;
+    private readonly InputAction m_Master_MoveGamepad;
+    private readonly InputAction m_Master_MoveToCursor;
+    private readonly InputAction m_Master_Quit;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "Master".
+    /// </summary>
+    public struct MasterActions
+    {
+        private @InputActions m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public MasterActions(@InputActions wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "Master/MoveMouse".
+        /// </summary>
+        public InputAction @MoveMouse => m_Wrapper.m_Master_MoveMouse;
+        /// <summary>
+        /// Provides access to the underlying input action "Master/MoveGamepad".
+        /// </summary>
+        public InputAction @MoveGamepad => m_Wrapper.m_Master_MoveGamepad;
+        /// <summary>
+        /// Provides access to the underlying input action "Master/MoveToCursor".
+        /// </summary>
+        public InputAction @MoveToCursor => m_Wrapper.m_Master_MoveToCursor;
+        /// <summary>
+        /// Provides access to the underlying input action "Master/Quit".
+        /// </summary>
+        public InputAction @Quit => m_Wrapper.m_Master_Quit;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_Master; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="MasterActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(MasterActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="MasterActions" />
+        public void AddCallbacks(IMasterActions instance)
+        {
+            if (instance == null || m_Wrapper.m_MasterActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_MasterActionsCallbackInterfaces.Add(instance);
+            @MoveMouse.started += instance.OnMoveMouse;
+            @MoveMouse.performed += instance.OnMoveMouse;
+            @MoveMouse.canceled += instance.OnMoveMouse;
+            @MoveGamepad.started += instance.OnMoveGamepad;
+            @MoveGamepad.performed += instance.OnMoveGamepad;
+            @MoveGamepad.canceled += instance.OnMoveGamepad;
+            @MoveToCursor.started += instance.OnMoveToCursor;
+            @MoveToCursor.performed += instance.OnMoveToCursor;
+            @MoveToCursor.canceled += instance.OnMoveToCursor;
+            @Quit.started += instance.OnQuit;
+            @Quit.performed += instance.OnQuit;
+            @Quit.canceled += instance.OnQuit;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="MasterActions" />
+        private void UnregisterCallbacks(IMasterActions instance)
+        {
+            @MoveMouse.started -= instance.OnMoveMouse;
+            @MoveMouse.performed -= instance.OnMoveMouse;
+            @MoveMouse.canceled -= instance.OnMoveMouse;
+            @MoveGamepad.started -= instance.OnMoveGamepad;
+            @MoveGamepad.performed -= instance.OnMoveGamepad;
+            @MoveGamepad.canceled -= instance.OnMoveGamepad;
+            @MoveToCursor.started -= instance.OnMoveToCursor;
+            @MoveToCursor.performed -= instance.OnMoveToCursor;
+            @MoveToCursor.canceled -= instance.OnMoveToCursor;
+            @Quit.started -= instance.OnQuit;
+            @Quit.performed -= instance.OnQuit;
+            @Quit.canceled -= instance.OnQuit;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="MasterActions.UnregisterCallbacks(IMasterActions)" />.
+        /// </summary>
+        /// <seealso cref="MasterActions.UnregisterCallbacks(IMasterActions)" />
+        public void RemoveCallbacks(IMasterActions instance)
+        {
+            if (m_Wrapper.m_MasterActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="MasterActions.AddCallbacks(IMasterActions)" />
+        /// <seealso cref="MasterActions.RemoveCallbacks(IMasterActions)" />
+        /// <seealso cref="MasterActions.UnregisterCallbacks(IMasterActions)" />
+        public void SetCallbacks(IMasterActions instance)
+        {
+            foreach (var item in m_Wrapper.m_MasterActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_MasterActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="MasterActions" /> instance referencing this action map.
+    /// </summary>
+    public MasterActions @Master => new MasterActions(this);
 
     // UI
     private readonly InputActionMap m_UI;
@@ -1004,113 +1186,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="UIActions" /> instance referencing this action map.
     /// </summary>
     public UIActions @UI => new UIActions(this);
-
-    // Master
-    private readonly InputActionMap m_Master;
-    private List<IMasterActions> m_MasterActionsCallbackInterfaces = new List<IMasterActions>();
-    private readonly InputAction m_Master_Move;
-    private readonly InputAction m_Master_Quit;
-    /// <summary>
-    /// Provides access to input actions defined in input action map "Master".
-    /// </summary>
-    public struct MasterActions
-    {
-        private @InputActions m_Wrapper;
-
-        /// <summary>
-        /// Construct a new instance of the input action map wrapper class.
-        /// </summary>
-        public MasterActions(@InputActions wrapper) { m_Wrapper = wrapper; }
-        /// <summary>
-        /// Provides access to the underlying input action "Master/Move".
-        /// </summary>
-        public InputAction @Move => m_Wrapper.m_Master_Move;
-        /// <summary>
-        /// Provides access to the underlying input action "Master/Quit".
-        /// </summary>
-        public InputAction @Quit => m_Wrapper.m_Master_Quit;
-        /// <summary>
-        /// Provides access to the underlying input action map instance.
-        /// </summary>
-        public InputActionMap Get() { return m_Wrapper.m_Master; }
-        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
-        public void Enable() { Get().Enable(); }
-        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
-        public void Disable() { Get().Disable(); }
-        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
-        public bool enabled => Get().enabled;
-        /// <summary>
-        /// Implicitly converts an <see ref="MasterActions" /> to an <see ref="InputActionMap" /> instance.
-        /// </summary>
-        public static implicit operator InputActionMap(MasterActions set) { return set.Get(); }
-        /// <summary>
-        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
-        /// </summary>
-        /// <param name="instance">Callback instance.</param>
-        /// <remarks>
-        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
-        /// </remarks>
-        /// <seealso cref="MasterActions" />
-        public void AddCallbacks(IMasterActions instance)
-        {
-            if (instance == null || m_Wrapper.m_MasterActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_MasterActionsCallbackInterfaces.Add(instance);
-            @Move.started += instance.OnMove;
-            @Move.performed += instance.OnMove;
-            @Move.canceled += instance.OnMove;
-            @Quit.started += instance.OnQuit;
-            @Quit.performed += instance.OnQuit;
-            @Quit.canceled += instance.OnQuit;
-        }
-
-        /// <summary>
-        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
-        /// </summary>
-        /// <remarks>
-        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
-        /// </remarks>
-        /// <seealso cref="MasterActions" />
-        private void UnregisterCallbacks(IMasterActions instance)
-        {
-            @Move.started -= instance.OnMove;
-            @Move.performed -= instance.OnMove;
-            @Move.canceled -= instance.OnMove;
-            @Quit.started -= instance.OnQuit;
-            @Quit.performed -= instance.OnQuit;
-            @Quit.canceled -= instance.OnQuit;
-        }
-
-        /// <summary>
-        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="MasterActions.UnregisterCallbacks(IMasterActions)" />.
-        /// </summary>
-        /// <seealso cref="MasterActions.UnregisterCallbacks(IMasterActions)" />
-        public void RemoveCallbacks(IMasterActions instance)
-        {
-            if (m_Wrapper.m_MasterActionsCallbackInterfaces.Remove(instance))
-                UnregisterCallbacks(instance);
-        }
-
-        /// <summary>
-        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
-        /// </summary>
-        /// <remarks>
-        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
-        /// </remarks>
-        /// <seealso cref="MasterActions.AddCallbacks(IMasterActions)" />
-        /// <seealso cref="MasterActions.RemoveCallbacks(IMasterActions)" />
-        /// <seealso cref="MasterActions.UnregisterCallbacks(IMasterActions)" />
-        public void SetCallbacks(IMasterActions instance)
-        {
-            foreach (var item in m_Wrapper.m_MasterActionsCallbackInterfaces)
-                UnregisterCallbacks(item);
-            m_Wrapper.m_MasterActionsCallbackInterfaces.Clear();
-            AddCallbacks(instance);
-        }
-    }
-    /// <summary>
-    /// Provides a new <see cref="MasterActions" /> instance referencing this action map.
-    /// </summary>
-    public MasterActions @Master => new MasterActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     /// <summary>
     /// Provides access to the input control scheme.
@@ -1175,6 +1250,42 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             if (m_XRSchemeIndex == -1) m_XRSchemeIndex = asset.FindControlSchemeIndex("XR");
             return asset.controlSchemes[m_XRSchemeIndex];
         }
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Master" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="MasterActions.AddCallbacks(IMasterActions)" />
+    /// <seealso cref="MasterActions.RemoveCallbacks(IMasterActions)" />
+    public interface IMasterActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "Move (Mouse)" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnMoveMouse(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Move (Gamepad)" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnMoveGamepad(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Move To Cursor" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnMoveToCursor(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Quit" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnQuit(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.
@@ -1253,27 +1364,5 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
-    }
-    /// <summary>
-    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Master" which allows adding and removing callbacks.
-    /// </summary>
-    /// <seealso cref="MasterActions.AddCallbacks(IMasterActions)" />
-    /// <seealso cref="MasterActions.RemoveCallbacks(IMasterActions)" />
-    public interface IMasterActions
-    {
-        /// <summary>
-        /// Method invoked when associated input action "Move" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnMove(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "Quit" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnQuit(InputAction.CallbackContext context);
     }
 }

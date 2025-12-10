@@ -1,13 +1,11 @@
-using UnityEngine;
+using Managers.Global;
 
 namespace Game.Player {
   internal class WonState : State {
-    private static readonly int isWalking = Animator.StringToHash("isWalking");
-
     protected override void Enter() {
-      this.Player.animator.SetBool(isWalking, false);
+      this.Player.animator.SetBool(AnimationLibrary.isWalking, false);
       this.Player.won.Trigger(this.Player.transform.position);
-      this.Player.InputActions.Master.Disable();
+      InputManager.Actions.Master.Disable();
       this.Player.Agent.ResetPath();
       this.Player.Agent.speed = 0;
 

@@ -7,12 +7,6 @@ using State = Game.Player.State;
 
 namespace Game {
   public class PlayerController : MonoBehaviour {
-    [Header("Movement")]
-    public float stopDistance = 0.1f;
-
-    public float speedRampFactor = 5.0f;
-    public float turnSpeed = 15.0f;
-
     [SerializeField]
     private ParticleSystem clickEffect;
 
@@ -28,7 +22,6 @@ namespace Game {
     public GameEvent<Vector3> collectedCoin;
     public GameEvent<Vector3> won;
 
-    public InputActions InputActions { get; private set; }
     public CharacterController Controller { get; private set; }
     public Camera MainCamera { get; private set; }
     public PlayerData Data { get; private set; }
@@ -48,19 +41,15 @@ namespace Game {
 
     // Called once per frame
     private void Update() {
-      if (this.InputActions.Master.Move.IsPressed()) {
-        this.SetMoveTarget();
-      }
-
       this.Data.State.Update();
     }
 
     private void OnEnable() {
-      this.InputActions.Master.Enable();
+      InputManager.Actions.Master.Enable();
     }
 
     private void OnDisable() {
-      this.InputActions.Master.Disable();
+      InputManager.Actions.Master.Disable();
     }
 
     // Called when another collider enters this trigger collider
@@ -90,9 +79,8 @@ namespace Game {
     }
 
     private void ConnectInputCallbacks() {
-      this.InputActions = new InputActions();
-      this.InputActions.Master.Move.performed += this.Move;
-      this.InputActions.Master.Quit.performed += this.Quit;
+      InputManager.Actions.Master.MoveToCursor.canceled += this.MoveToCursor;
+      InputManager.Actions.Master.Quit.performed += this.Quit;
     }
 
     private void Quit(InputAction.CallbackContext ctx) {
@@ -100,9 +88,10 @@ namespace Game {
       Application.Quit();
     }
 
-    private void Move(InputAction.CallbackContext ctx) {
-      Logger.Log("Move");
+    private void MoveToCursor(InputAction.CallbackContext ctx) {
+      Logger.Log("MoveToCursorCanceled");
       this.SpawnClickMarker();
+      this.SetMoveTarget();
     }
 
     private RaycastHit? GetClickHit() {
@@ -138,7 +127,7 @@ namespace Game {
       Logger.Log("SetMoveTarget");
       if (this.GetClickHit() is { } hit) {
         var distance = Vector3.Distance(this.transform.position, hit.point);
-        if (distance < this.stopDistance) {
+        if (distance < this.Data.stopDistance) {
           Logger.Log("Move target too close");
           return;
         }
@@ -147,16 +136,6 @@ namespace Game {
       } else {
         Logger.Log("Move target hit missed");
       }
-    }
-
-    public void FaceTarget() {
-      var direction = this.Agent.desiredVelocity.normalized;
-      var lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-      this.transform.rotation = Quaternion.Slerp(
-        this.transform.rotation,
-        lookRotation,
-        Time.deltaTime * this.turnSpeed
-      );
     }
   }
 }
