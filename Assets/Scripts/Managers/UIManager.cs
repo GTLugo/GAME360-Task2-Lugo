@@ -22,6 +22,10 @@ namespace Managers {
       EventManager.playerDied.Unsubscribe(this.PlayerLost);
     }
 
+    public void QuitGame() {
+      Application.Quit();
+    }
+
     private void UpdateScore(int score) {
       if (!this.scoreObject) {
         Logger.LogError("Score Object was null");
