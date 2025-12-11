@@ -12,22 +12,37 @@ Course: **GAME 360 - Development with Game Engines, Fall 2025**
 
 ## How to Play
 
-[Installation and controls]
+Install by downloading the build for your OS from the Releases page.
+
+### Controls
+
+All controls are bound to the left mouse button for simplicity
+
+* Move / Interact / Attack - Left Mouse Button
 
 ## Features
 
-[All implemented features]
+### Implemented Features
 
-Implemented Mechanics
+* Basic Movement
+* AI Navigation
+* World interactions
+* Audio subsystem
+* Event-based mechanics
+* Enemy combat
+* Basic animation
+* Stylized shader materials
 
-- [Core Mechanic 1]
-- [Core Mechanic 2]
-- [Core Mechanic 3]
-- Score/Progress System
-- Power-Ups/Collectibles
-- Enemy AI (if applicable)
-- Multiple Levels/Scenes
-- Win/Lose Conditions
+### Implemented Mechanics
+
+* [Core Mechanic 1]
+* [Core Mechanic 2]
+* [Core Mechanic 3]
+* Score/Progress System
+* Power-Ups/Collectibles
+* Enemy AI (if applicable)
+* Multiple Levels/Scenes
+* Win/Lose Conditions
 
 ## Architecture
 
@@ -35,14 +50,14 @@ Implemented Mechanics
 
 ## Development Statistics
 
-- Total Commits: [number]
-- Development Time: [hours]
-- Lines of Code: [approximate]
+* Total Commits: **55**
+* Development Time: **~100 hours**
+* Lines of Code: **~800**
 
 ## Screenshots
 
 [Screenshot 1](Screenshots/gameplay1.png)
-*Main gameplay showing [feature]*
+*Main gameplay showing game map*
 
 [Screenshot 2](Screenshots/menu.png)
 *Main menu interface*
@@ -52,29 +67,47 @@ Implemented Mechanics
 
 ## Credits
 
-[All attributions]
+### Audio (Music & SFX)
 
-- Audio (Music & SFX)
+* [FREE Casual Game SFX Pack](https://assetstore.unity.com/packages/p/free-casual-game-sfx-pack-54116)
+* [Other Audio](https://opengameart.org/)
 
-- Art Assets
+### Art Assets
+
+* [Kenney](https://kenney.nl/)
+
+### Guides
+
+* [Brackeys](https://www.youtube.com/@Brackeys)
+* [Game Dev Beginner](https://www.youtube.com/@GameDevBeginner)
+* [Jason Weimann](https://www.youtube.com/@Unity3dCollege)
 
 ## Post-Mortem
 
-[Reflection on development]
+### What I learned
 
-- What I learned
+After completing this, I learned that even the smallest, simplest components of a game require much time and patience to implement. There were many times when I wanted to throw in the towel while implementing a feature. If I were to do this again, I would either drastically increase my timeline or cut down on certain features.
 
-- Future Improvements [List of features]
+### Future Improvements [List of features]
 
- Developer
+* Jumping / Dashing / Dodging
+* Improve movement
+* Fix controller support
+* Spruce up main menu
+* Add pause menu
+* Background music
+* More animations
+* Respawn mechanic
 
-**[Your Name]**  
-Student ID: [Your ID]  
+## Developer
+
+**Gabriel A. Lugo-Maldonado**  
+Student ID: 01102327  
 Old Dominion University - GAME 360  
 Fall 2025  
 
-Email: [your email]  
-Portfolio: [if applicable]  
-LinkedIn: [if applicable]
+Email: <gabe@lugo.studio>  
+Portfolio: <https://resume.gtlugo.com/>  
+LinkedIn: <https://www.linkedin.com/in/gabriel-a-lugo>
 
 ----------------------------------------------
