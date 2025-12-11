@@ -10,7 +10,7 @@ namespace Game.Player {
     public float gravityVelocity;
     public Vector3 moveVelocity;
 
-    public float stopDistance = 0.1f;
+    // public float stopDistance = 0.1f;
     public float deadZone = 0.01f;
     public float turnSpeed = 15.0f;
     public float turnTime = 0.1f;

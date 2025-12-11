@@ -46,8 +46,6 @@ namespace Game {
         if (InputManager.GetMousePosInWorld(this.interactableLayers) is { } hit &&
             hit.collider.GetComponent<Interactable>() is { } interactable) {
           this.SetFocus(interactable);
-          EventManager.buttonPushed.Trigger((0, hit.point));
-          Logger.Log("Click!");
         } else {
           this.RemoveFocus();
         }
@@ -55,6 +53,8 @@ namespace Game {
 
       if (this._target) {
         this.Agent.destination = this._target.position;
+        var direction = (this._target.position - this.transform.position).normalized;
+        this.FaceDirection(direction);
       }
 
       this.Data.State.Update();
@@ -85,12 +85,24 @@ namespace Game {
     }
 
     private void SetFocus(Interactable newFocus) {
-      this._focus = newFocus;
-      this.FollowTarget(this._focus);
+      if (newFocus != this._focus) {
+        if (this._focus) {
+          this._focus.OnDefocused();
+        }
+
+        this._focus = newFocus;
+        this.FollowTarget(this._focus);
+      }
+
+      this._focus.OnFocused(this);
     }
 
     private void RemoveFocus() {
-      this._focus = null;
+      if (this._focus) {
+        this._focus.OnDefocused();
+        this._focus = null;
+      }
+
       this.StopFollowingTarget();
     }
 
@@ -191,7 +203,7 @@ namespace Game {
 
       if (InputManager.GetMousePosInWorld(this.clickableLayers) is { } hit) {
         var distance = Vector3.Distance(this.transform.position, hit.point);
-        if (distance < this.Data.stopDistance) {
+        if (distance < this.Data.deadZone) {
           Logger.Log("Move target too close");
           return;
         }
@@ -202,12 +214,18 @@ namespace Game {
       }
     }
 
-    public void FollowTarget(Interactable interactable) {
+    private void FollowTarget(Interactable interactable) {
+      this.Agent.stoppingDistance = interactable.radius * 0.8f;
       this._target = interactable.transform;
     }
 
-    public void StopFollowingTarget() {
+    private void StopFollowingTarget() {
+      this.Agent.stoppingDistance = 0;
       this._target = null;
+    }
+
+    public bool IsAgentDone() {
+      return this.Agent.remainingDistance <= this.Agent.stoppingDistance;
     }
 
     private void OnDied(Vector3 position) {
@@ -221,6 +239,15 @@ namespace Game {
       this.Data.Health = this.Data.MaxHealth;
       InputManager.Actions.Master.Enable();
       this.Data.IsAlive = true;
+    }
+
+    public void FaceDirection(Vector3 direction) {
+      var lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0f, direction.z));
+      this.transform.rotation = Quaternion.Slerp(
+        this.transform.rotation,
+        lookRotation,
+        Time.deltaTime * this.Data.turnSpeed
+      );
     }
   }
 }

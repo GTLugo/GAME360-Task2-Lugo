@@ -31,5 +31,9 @@ namespace Game.Enemy {
       // Gizmos.color = Color.magenta;
       // Gizmos.DrawWireSphere(this.transform.position, this._agent.stoppingDistance);
     }
+
+    public void OnInteract(Interactable interactable) {
+      
+    }
   }
 }

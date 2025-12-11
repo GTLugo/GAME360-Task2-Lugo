@@ -50,13 +50,11 @@ namespace Game.Player {
         var direction = new Vector3(input.x, 0.0f, input.y);
         this.FreeMove(direction);
       } else {
-        var agentDone = this.Player.Agent.remainingDistance <
-                        this.Player.Data.stopDistance;
-        if (agentDone) {
+        if (this.Player.IsAgentDone()) {
           this.Transition<IdleState>();
         }
 
-        this.FaceDirection(this.Player.Agent.desiredVelocity.normalized);
+        this.Player.FaceDirection(this.Player.Agent.desiredVelocity.normalized);
       }
     }
 
@@ -81,21 +79,12 @@ namespace Game.Player {
 
       this.Player.Agent.updatePosition = false;
 
-      this.FaceDirection(direction);
+      this.Player.FaceDirection(direction);
       this.Player.Data.moveVelocity = direction * (this.Player.Data.MoveSpeed * Time.deltaTime);
       this.Player.Controller.Move(this.Player.Data.moveVelocity);
 
       this.Player.Agent.Warp(this.Player.transform.position);
       this.Player.Agent.updatePosition = true;
-    }
-
-    private void FaceDirection(Vector3 direction) {
-      var lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-      this.Player.transform.rotation = Quaternion.Slerp(
-        this.Player.transform.rotation,
-        lookRotation,
-        Time.deltaTime * this.Player.Data.turnSpeed
-      );
     }
   }
 }

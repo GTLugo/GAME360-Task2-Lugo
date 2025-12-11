@@ -21,9 +21,9 @@ namespace Game.Player {
 
       switch (InputManager.CurrentControlScheme) {
         case ControlScheme.Keyboard:
-          var agentCanMove = this.Player.Agent.remainingDistance >=
-                             this.Player.Data.stopDistance;
-          if (InputManager.Actions.Master.MoveToCursor.IsPressed() || agentCanMove) {
+          // var agentCanMove = this.Player.Agent.remainingDistance >=
+          //                    this.Player.Data.stopDistance;
+          if (InputManager.Actions.Master.MoveToCursor.IsPressed() || !this.Player.IsAgentDone()) {
             this.Transition<WalkState>();
           }
 
