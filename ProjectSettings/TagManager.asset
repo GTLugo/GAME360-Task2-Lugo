@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ground
   - Coin
+  - Kill
+  - Interactable
   layers:
   - Default
   - TransparentFX
@@ -15,7 +17,7 @@ TagManager:
   - UI
   - Terrain
   - Wall
-  - 
+  - Interactable
   - 
   - 
   - MainCamera
@@ -54,3 +56,6 @@ TagManager:
   - Light Layer 7
   - Outline
   - NoEdge
+  - HashFill
+  - Interactable
+  - Player

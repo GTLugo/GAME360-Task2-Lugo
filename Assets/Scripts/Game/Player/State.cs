@@ -4,10 +4,13 @@ namespace Game.Player {
 
     protected virtual void Enter() { }
 
-    public abstract void Update();
+    protected virtual void Exit() { }
+
+    public virtual void Update() { }
 
     protected void Transition<T>() where T : State, new() {
       Logger.Log($"Transitioning from `{this.GetType()}` to {typeof(T)}");
+      this.Exit();
       var newState = new T {
         Player = this.Player
       };

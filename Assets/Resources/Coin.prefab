@@ -70,7 +70,10 @@ MonoBehaviour:
   scoreValue: 10
   rotationSpeed: 100
   rotationVector: {x: 0, y: 1, z: 0}
-  mesh: {fileID: 7138790114068484872}
+  targetButtonId: -1
+  meshTransform: {fileID: 7138790114068484872}
+  meshRenderer: {fileID: 4639852387315957517}
+  collider: {fileID: 8784383973717159567}
 --- !u!1001 &1891591587280144547
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -136,6 +139,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: -5814230247879327577, guid: 3a940c40407f6d146bf0901df82a4f0a, type: 3}
+--- !u!23 &4639852387315957517 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6495415170859562926, guid: 3a940c40407f6d146bf0901df82a4f0a, type: 3}
+  m_PrefabInstance: {fileID: 1891591587280144547}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7058983401078498393 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -308843444164694790, guid: 3a940c40407f6d146bf0901df82a4f0a, type: 3}

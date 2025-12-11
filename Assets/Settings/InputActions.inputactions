@@ -7,16 +7,7 @@
             "id": "a2a2a401-1d55-4f95-add6-413d8473ee52",
             "actions": [
                 {
-                    "name": "Move (Mouse)",
-                    "type": "Value",
-                    "id": "1fb8d064-bc20-4525-9ada-10bfe40725e7",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "Move (Gamepad)",
+                    "name": "Move",
                     "type": "Value",
                     "id": "240a6810-fca2-41ee-a244-d05672fbcd6b",
                     "expectedControlType": "Vector2",
@@ -37,6 +28,24 @@
                     "name": "Quit",
                     "type": "Button",
                     "id": "41fd091e-70a5-440a-84f2-9eecc3ced5ba",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Attack / Interact",
+                    "type": "Button",
+                    "id": "9cd8e31a-3a91-4b60-90f0-900f9176e3bb",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Root Player",
+                    "type": "Button",
+                    "id": "431e7e99-c15a-4b8d-877c-19179429e92c",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -79,23 +88,45 @@
                 },
                 {
                     "name": "",
-                    "id": "37b4bed2-e86c-4375-87f3-3c85307d72a0",
-                    "path": "<Mouse>/position",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "Move (Mouse)",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "e26ef098-4878-4ba0-8c6e-0fcf32b3bd6e",
                     "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
-                    "action": "Move (Gamepad)",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2a246022-7124-4390-a22a-ea39fedc861c",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Attack / Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0da4f47c-82e2-49db-a7fd-ca6cef866bb9",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Attack / Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "eb1102ac-dcab-4d9c-aade-ecc002d0535a",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Root Player",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

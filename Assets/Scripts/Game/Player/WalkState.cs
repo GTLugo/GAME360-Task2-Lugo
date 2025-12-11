@@ -8,67 +8,85 @@ namespace Game.Player {
       Logger.Log($"Player `{this.Player.name}` is Walking");
     }
 
+    protected override void Exit() {
+      this.Player.animator.SetBool(AnimationLibrary.isWalking, false);
+    }
+
     public override void Update() {
-      var moveInput = InputManager.GetMoveVector();
+      this.Player.Agent.speed = this.Player.Data.MoveSpeed;
       // Logger.Log($"WALK | moveInput `{moveInput}`");
 
-      if (this.Player.Data.Score >= this.Player.Data.TargetScore) {
+      if (this.Player.Data.HasWon) {
         this.Transition<WonState>();
+        return;
+      }
+
+      if (this.Player.Data.Health <= 0) {
+        this.Transition<DeadState>();
         return;
       }
 
       switch (InputManager.CurrentControlScheme) {
         case ControlScheme.Keyboard:
-          // Convert from (0.0, SCREEN) to (-1.0, 1.0)
-          moveInput /= new Vector2(Screen.width, Screen.height);
-          moveInput *= 2.0f;
-          moveInput = Vector2.ClampMagnitude(moveInput - new Vector2(1.0f, 1.0f), 1.0f);
-          // Reshape to be circular and clamp
-          moveInput = Vector2.ClampMagnitude(moveInput * 5.0f, 1.0f);
-
-          if (InputManager.Actions.Master.MoveToCursor.IsPressed()) {
-            if (moveInput.sqrMagnitude < this.Player.Data.deadZone) {
-              this.Transition<IdleState>();
-            }
-
-            this.FreeMove(moveInput);
-          } else {
-            var agentDone = this.Player.Agent.remainingDistance <
-                            this.Player.Data.stopDistance;
-            if (agentDone) {
-              this.Transition<IdleState>();
-            }
-
-            var direction = this.Player.Agent.desiredVelocity.normalized;
-            this.FaceDirection(direction);
-          }
-
+          this.UpdateKeyboard();
           break;
         case ControlScheme.Gamepad:
-          this.Player.Agent.ResetPath();
-
-          if (moveInput.sqrMagnitude < this.Player.Data.deadZone) {
-            this.Transition<IdleState>();
-          }
-
-          this.FreeMove(moveInput);
+          this.UpdateGamepad();
           break;
         default:
           return;
       }
+
+      // this.Player.ApplyGravity();
+    }
+
+    private void UpdateKeyboard() {
+      var infinitePlane = new Plane(Vector3.up, this.Player.transform.position);
+      var mouseWorldPos = InputManager.GetMousePosOnPlane(infinitePlane);
+      var pointing = mouseWorldPos - this.Player.transform.position;
+      var input = Vector2.ClampMagnitude(new Vector2(pointing.x, pointing.z), 1.0f);
+
+      if (InputManager.Actions.Master.MoveToCursor.IsPressed()) {
+        var direction = new Vector3(input.x, 0.0f, input.y);
+        this.FreeMove(direction);
+      } else {
+        var agentDone = this.Player.Agent.remainingDistance <
+                        this.Player.Data.stopDistance;
+        if (agentDone) {
+          this.Transition<IdleState>();
+        }
+
+        this.FaceDirection(this.Player.Agent.desiredVelocity.normalized);
+      }
+    }
+
+    private void UpdateGamepad() {
+      var input = InputManager.GetMoveVector();
+
+      if (input.sqrMagnitude < this.Player.Data.deadZone) {
+        this.Transition<IdleState>();
+      }
+
+      var direction = Quaternion.AngleAxis(45, Vector3.up) * new Vector3(input.x, 0.0f, input.y);
+      this.FreeMove(direction);
     }
 
 
-    private void FreeMove(Vector2 input) {
-      Logger.Log($"Move | Input: {input}");
-
-      var direction = Quaternion.AngleAxis(45, Vector3.up) * new Vector3(input.x, 0.0f, input.y);
+    private void FreeMove(Vector3 direction) {
       if (direction.magnitude < this.Player.Data.deadZone) {
         return;
       }
 
+      Logger.Log($"Move | Input: {direction}");
+
+      this.Player.Agent.updatePosition = false;
+
       this.FaceDirection(direction);
-      this.Player.Controller.Move(direction * (this.Player.Data.MoveSpeed * Time.deltaTime));
+      this.Player.Data.moveVelocity = direction * (this.Player.Data.MoveSpeed * Time.deltaTime);
+      this.Player.Controller.Move(this.Player.Data.moveVelocity);
+
+      this.Player.Agent.Warp(this.Player.transform.position);
+      this.Player.Agent.updatePosition = true;
     }
 
     private void FaceDirection(Vector3 direction) {

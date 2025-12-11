@@ -93,16 +93,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             ""id"": ""a2a2a401-1d55-4f95-add6-413d8473ee52"",
             ""actions"": [
                 {
-                    ""name"": ""Move (Mouse)"",
-                    ""type"": ""Value"",
-                    ""id"": ""1fb8d064-bc20-4525-9ada-10bfe40725e7"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Move (Gamepad)"",
+                    ""name"": ""Move"",
                     ""type"": ""Value"",
                     ""id"": ""240a6810-fca2-41ee-a244-d05672fbcd6b"",
                     ""expectedControlType"": ""Vector2"",
@@ -123,6 +114,24 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""name"": ""Quit"",
                     ""type"": ""Button"",
                     ""id"": ""41fd091e-70a5-440a-84f2-9eecc3ced5ba"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Attack / Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""9cd8e31a-3a91-4b60-90f0-900f9176e3bb"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Root Player"",
+                    ""type"": ""Button"",
+                    ""id"": ""431e7e99-c15a-4b8d-877c-19179429e92c"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -165,23 +174,45 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""37b4bed2-e86c-4375-87f3-3c85307d72a0"",
-                    ""path"": ""<Mouse>/position"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Move (Mouse)"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""e26ef098-4878-4ba0-8c6e-0fcf32b3bd6e"",
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Gamepad"",
-                    ""action"": ""Move (Gamepad)"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2a246022-7124-4390-a22a-ea39fedc861c"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Attack / Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0da4f47c-82e2-49db-a7fd-ca6cef866bb9"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Attack / Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""eb1102ac-dcab-4d9c-aade-ecc002d0535a"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Root Player"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -769,10 +800,11 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
 }");
         // Master
         m_Master = asset.FindActionMap("Master", throwIfNotFound: true);
-        m_Master_MoveMouse = m_Master.FindAction("Move (Mouse)", throwIfNotFound: true);
-        m_Master_MoveGamepad = m_Master.FindAction("Move (Gamepad)", throwIfNotFound: true);
+        m_Master_Move = m_Master.FindAction("Move", throwIfNotFound: true);
         m_Master_MoveToCursor = m_Master.FindAction("Move To Cursor", throwIfNotFound: true);
         m_Master_Quit = m_Master.FindAction("Quit", throwIfNotFound: true);
+        m_Master_AttackInteract = m_Master.FindAction("Attack / Interact", throwIfNotFound: true);
+        m_Master_RootPlayer = m_Master.FindAction("Root Player", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -866,10 +898,11 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     // Master
     private readonly InputActionMap m_Master;
     private List<IMasterActions> m_MasterActionsCallbackInterfaces = new List<IMasterActions>();
-    private readonly InputAction m_Master_MoveMouse;
-    private readonly InputAction m_Master_MoveGamepad;
+    private readonly InputAction m_Master_Move;
     private readonly InputAction m_Master_MoveToCursor;
     private readonly InputAction m_Master_Quit;
+    private readonly InputAction m_Master_AttackInteract;
+    private readonly InputAction m_Master_RootPlayer;
     /// <summary>
     /// Provides access to input actions defined in input action map "Master".
     /// </summary>
@@ -882,13 +915,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// </summary>
         public MasterActions(@InputActions wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "Master/MoveMouse".
+        /// Provides access to the underlying input action "Master/Move".
         /// </summary>
-        public InputAction @MoveMouse => m_Wrapper.m_Master_MoveMouse;
-        /// <summary>
-        /// Provides access to the underlying input action "Master/MoveGamepad".
-        /// </summary>
-        public InputAction @MoveGamepad => m_Wrapper.m_Master_MoveGamepad;
+        public InputAction @Move => m_Wrapper.m_Master_Move;
         /// <summary>
         /// Provides access to the underlying input action "Master/MoveToCursor".
         /// </summary>
@@ -897,6 +926,14 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Master/Quit".
         /// </summary>
         public InputAction @Quit => m_Wrapper.m_Master_Quit;
+        /// <summary>
+        /// Provides access to the underlying input action "Master/AttackInteract".
+        /// </summary>
+        public InputAction @AttackInteract => m_Wrapper.m_Master_AttackInteract;
+        /// <summary>
+        /// Provides access to the underlying input action "Master/RootPlayer".
+        /// </summary>
+        public InputAction @RootPlayer => m_Wrapper.m_Master_RootPlayer;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -923,18 +960,21 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_MasterActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_MasterActionsCallbackInterfaces.Add(instance);
-            @MoveMouse.started += instance.OnMoveMouse;
-            @MoveMouse.performed += instance.OnMoveMouse;
-            @MoveMouse.canceled += instance.OnMoveMouse;
-            @MoveGamepad.started += instance.OnMoveGamepad;
-            @MoveGamepad.performed += instance.OnMoveGamepad;
-            @MoveGamepad.canceled += instance.OnMoveGamepad;
+            @Move.started += instance.OnMove;
+            @Move.performed += instance.OnMove;
+            @Move.canceled += instance.OnMove;
             @MoveToCursor.started += instance.OnMoveToCursor;
             @MoveToCursor.performed += instance.OnMoveToCursor;
             @MoveToCursor.canceled += instance.OnMoveToCursor;
             @Quit.started += instance.OnQuit;
             @Quit.performed += instance.OnQuit;
             @Quit.canceled += instance.OnQuit;
+            @AttackInteract.started += instance.OnAttackInteract;
+            @AttackInteract.performed += instance.OnAttackInteract;
+            @AttackInteract.canceled += instance.OnAttackInteract;
+            @RootPlayer.started += instance.OnRootPlayer;
+            @RootPlayer.performed += instance.OnRootPlayer;
+            @RootPlayer.canceled += instance.OnRootPlayer;
         }
 
         /// <summary>
@@ -946,18 +986,21 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="MasterActions" />
         private void UnregisterCallbacks(IMasterActions instance)
         {
-            @MoveMouse.started -= instance.OnMoveMouse;
-            @MoveMouse.performed -= instance.OnMoveMouse;
-            @MoveMouse.canceled -= instance.OnMoveMouse;
-            @MoveGamepad.started -= instance.OnMoveGamepad;
-            @MoveGamepad.performed -= instance.OnMoveGamepad;
-            @MoveGamepad.canceled -= instance.OnMoveGamepad;
+            @Move.started -= instance.OnMove;
+            @Move.performed -= instance.OnMove;
+            @Move.canceled -= instance.OnMove;
             @MoveToCursor.started -= instance.OnMoveToCursor;
             @MoveToCursor.performed -= instance.OnMoveToCursor;
             @MoveToCursor.canceled -= instance.OnMoveToCursor;
             @Quit.started -= instance.OnQuit;
             @Quit.performed -= instance.OnQuit;
             @Quit.canceled -= instance.OnQuit;
+            @AttackInteract.started -= instance.OnAttackInteract;
+            @AttackInteract.performed -= instance.OnAttackInteract;
+            @AttackInteract.canceled -= instance.OnAttackInteract;
+            @RootPlayer.started -= instance.OnRootPlayer;
+            @RootPlayer.performed -= instance.OnRootPlayer;
+            @RootPlayer.canceled -= instance.OnRootPlayer;
         }
 
         /// <summary>
@@ -1259,19 +1302,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     public interface IMasterActions
     {
         /// <summary>
-        /// Method invoked when associated input action "Move (Mouse)" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Move" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnMoveMouse(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "Move (Gamepad)" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnMoveGamepad(InputAction.CallbackContext context);
+        void OnMove(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "Move To Cursor" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
@@ -1286,6 +1322,20 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnQuit(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Attack / Interact" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnAttackInteract(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Root Player" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnRootPlayer(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

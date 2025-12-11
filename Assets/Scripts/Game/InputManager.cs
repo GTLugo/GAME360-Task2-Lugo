@@ -14,14 +14,18 @@ namespace Game {
     private static InputActions s_actions;
 
     [field: SerializeField]
-    public PlayerInput PlayerInput { get; set; }
+    private PlayerInput playerInput;
 
     private InputDevice _lastDevice;
+    private Camera _mainCamera;
 
     public static ControlScheme CurrentControlScheme { get; private set; }
 
-
     public static InputActions Actions => s_actions ??= new InputActions();
+
+    private void Start() {
+      this._mainCamera = Camera.main;
+    }
 
     private void OnEnable() {
       InputSystem.onEvent += this.OnDeviceChange;
@@ -81,13 +85,30 @@ namespace Game {
       return CurrentControlScheme == ControlScheme.Gamepad;
     }
 
+    public static Vector3 GetMousePosOnPlane(Plane plane) {
+      var mouseRay = Instance._mainCamera.ScreenPointToRay(Input.mousePosition);
+      plane.Raycast(mouseRay, out var distance);
+      var intersection = mouseRay.GetPoint(distance);
+
+      if (Application.isEditor) {
+        Debug.DrawLine(mouseRay.origin, intersection, Color.blue, 0.1f);
+      }
+
+      return intersection;
+    }
+
+    public static RaycastHit? GetMousePosInWorld(int clickableLayers) {
+      var ray = Instance._mainCamera.ScreenPointToRay(Input.mousePosition);
+
+      if (!Physics.Raycast(ray, out var hit, 100.0f, clickableLayers)) {
+        return null;
+      }
+
+      return hit;
+    }
+
     public static Vector2 GetMoveVector() {
-      return CurrentControlScheme switch {
-        ControlScheme.Keyboard => Actions.Master.MoveMouse.ReadValue<Vector2>(),
-        ControlScheme.Gamepad => Actions.Master.MoveGamepad.ReadValue<Vector2>(),
-        _ => Actions.Master.MoveMouse.ReadValue<Vector2>()
-      };
-      ;
+      return Actions.Master.Move.ReadValue<Vector2>();
     }
   }
 }

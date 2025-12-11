@@ -1,3 +1,4 @@
+using Managers.Global;
 using TMPro;
 using UnityEngine;
 
@@ -8,7 +9,17 @@ namespace Managers {
 
     public GameObject wonObject;
 
-    public void UpdateScore(int score) {
+    private void OnEnable() {
+      EventManager.scoreChanged.Subscribe(this.UpdateScore);
+      EventManager.playerWon.Subscribe(this.PlayerWon);
+    }
+
+    private void OnDisable() {
+      EventManager.scoreChanged.Unsubscribe(this.UpdateScore);
+      EventManager.playerWon.Unsubscribe(this.PlayerWon);
+    }
+
+    private void UpdateScore(int score) {
       if (!this.scoreObject) {
         Logger.LogError("Score Object was null");
         return;
@@ -24,7 +35,7 @@ namespace Managers {
       scoreText.text = $"Score: {score}";
     }
 
-    public void Won(Vector3 playerPosition) {
+    private void PlayerWon(Vector3 playerPosition) {
       if (!this.wonObject) {
         return;
       }

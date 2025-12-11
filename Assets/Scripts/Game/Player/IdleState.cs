@@ -1,9 +1,7 @@
-using Managers.Global;
-
 namespace Game.Player {
   internal class IdleState : State {
     protected override void Enter() {
-      this.Player.animator.SetBool(AnimationLibrary.isWalking, false);
+      this.Player.Agent.ResetPath();
       Logger.Log($"Player `{this.Player.name}` is Idle");
     }
 
@@ -11,8 +9,13 @@ namespace Game.Player {
       var moveInput = InputManager.GetMoveVector();
       // Logger.Log($"IDLE | moveInput `{moveInput}`");
 
-      if (this.Player.Data.Score >= this.Player.Data.TargetScore) {
+      if (this.Player.Data.HasWon) {
         this.Transition<WonState>();
+        return;
+      }
+
+      if (this.Player.Data.Health <= 0) {
+        this.Transition<DeadState>();
         return;
       }
 
@@ -34,6 +37,8 @@ namespace Game.Player {
         default:
           return;
       }
+
+      // this.Player.ApplyGravity();
     }
   }
 }
