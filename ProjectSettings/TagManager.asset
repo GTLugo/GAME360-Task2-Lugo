@@ -7,7 +7,6 @@ TagManager:
   - Ground
   - Coin
   - Kill
-  - Interactable
   layers:
   - Default
   - TransparentFX

@@ -40,7 +40,7 @@ MonoBehaviour:
     m_Bits: 1
   SectionMaskRenderingLayer:
     serializedVersion: 0
-    m_Bits: 768
+    m_Bits: 512
   maskInfluence: -1
   kernel: 0
   outlineThickness: 3

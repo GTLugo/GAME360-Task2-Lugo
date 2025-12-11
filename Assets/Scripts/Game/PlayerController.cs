@@ -19,7 +19,9 @@ namespace Game {
     [Header("Components")]
     public Animator animator;
 
-    // private Vector3 _moveTarget;
+    private Interactable _focus;
+
+    private Transform _target;
 
     public CharacterController Controller { get; private set; }
     private Camera MainCamera { get; set; }
@@ -42,10 +44,17 @@ namespace Game {
     private void Update() {
       if (InputManager.Actions.Master.AttackInteract.triggered) {
         if (InputManager.GetMousePosInWorld(this.interactableLayers) is { } hit &&
-            hit.collider.CompareTag("Interactable")) {
+            hit.collider.GetComponent<Interactable>() is { } interactable) {
+          this.SetFocus(interactable);
           EventManager.buttonPushed.Trigger((0, hit.point));
           Logger.Log("Click!");
+        } else {
+          this.RemoveFocus();
         }
+      }
+
+      if (this._target) {
+        this.Agent.destination = this._target.position;
       }
 
       this.Data.State.Update();
@@ -73,6 +82,16 @@ namespace Game {
       if (other.CompareTag("Kill")) {
         this.KillCollided(other);
       }
+    }
+
+    private void SetFocus(Interactable newFocus) {
+      this._focus = newFocus;
+      this.FollowTarget(this._focus);
+    }
+
+    private void RemoveFocus() {
+      this._focus = null;
+      this.StopFollowingTarget();
     }
 
     public void ApplyGravity() {
@@ -133,62 +152,62 @@ namespace Game {
     }
 
     private void MoveToCursor(InputAction.CallbackContext ctx) {
+      // if (InputManager.GetMousePosInWorld(this.interactableLayers) is { } hit &&
+      //     hit.collider.CompareTag("Interactable")) {
+      //   return;
+      // }
+      if (this._focus) {
+        return;
+      }
+
       Logger.Log("MoveToCursorCanceled");
       this.SpawnClickMarker();
       this.SetMoveTarget();
     }
 
     private void SpawnClickMarker() {
-      {
-        if (InputManager.GetMousePosInWorld(this.interactableLayers) is { } hit &&
-            hit.collider.CompareTag("Interactable")) {
-          return;
-        }
-      }
       Logger.Log("SpawnClickMarker");
 
-      {
-        if (InputManager.GetMousePosInWorld(this.clickableLayers) is { } hit) {
-          if (Application.isEditor) {
-            var ray = this.MainCamera.ScreenPointToRay(Input.mousePosition);
-            Debug.DrawLine(ray.origin, hit.point, Color.green, 0.1f);
-          }
-
-          if (this.clickEffect) {
-            Instantiate(
-              this.clickEffect,
-              hit.point += Vector3.up * 0.01f,
-              this.clickEffect.transform.rotation
-            );
-          }
-        } else {
-          Logger.Log("Click marker hit missed");
+      if (InputManager.GetMousePosInWorld(this.clickableLayers) is { } hit) {
+        if (Application.isEditor) {
+          var ray = this.MainCamera.ScreenPointToRay(Input.mousePosition);
+          Debug.DrawLine(ray.origin, hit.point, Color.green, 0.1f);
         }
+
+        if (this.clickEffect) {
+          Instantiate(
+            this.clickEffect,
+            hit.point += Vector3.up * 0.01f,
+            this.clickEffect.transform.rotation
+          );
+        }
+      } else {
+        Logger.Log("Click marker hit missed");
       }
     }
 
     private void SetMoveTarget() {
-      {
-        if (InputManager.GetMousePosInWorld(this.interactableLayers) is { } hit &&
-            hit.collider.CompareTag("Interactable")) {
-          return;
-        }
-      }
       Logger.Log("SetMoveTarget");
 
-      {
-        if (InputManager.GetMousePosInWorld(this.clickableLayers) is { } hit) {
-          var distance = Vector3.Distance(this.transform.position, hit.point);
-          if (distance < this.Data.stopDistance) {
-            Logger.Log("Move target too close");
-            return;
-          }
-
-          this.Agent.destination = hit.point;
-        } else {
-          Logger.Log("Move target hit missed");
+      if (InputManager.GetMousePosInWorld(this.clickableLayers) is { } hit) {
+        var distance = Vector3.Distance(this.transform.position, hit.point);
+        if (distance < this.Data.stopDistance) {
+          Logger.Log("Move target too close");
+          return;
         }
+
+        this.Agent.destination = hit.point;
+      } else {
+        Logger.Log("Move target hit missed");
       }
+    }
+
+    public void FollowTarget(Interactable interactable) {
+      this._target = interactable.transform;
+    }
+
+    public void StopFollowingTarget() {
+      this._target = null;
     }
 
     private void OnDied(Vector3 position) {
