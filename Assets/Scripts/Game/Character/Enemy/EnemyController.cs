@@ -8,12 +8,14 @@ namespace Game.Character.Enemy {
     public float lookRadius = 5f;
 
     private NavMeshAgent _agent;
+    private CharacterCombat _combat;
     private CharacterStats _stats;
     private Transform _target;
 
     private void Start() {
       this._stats = this.GetComponent<CharacterStats>();
       this._agent = this.GetComponent<NavMeshAgent>();
+      this._combat = this.GetComponent<CharacterCombat>();
       this._target = PlayerManager.Instance.player.transform;
     }
 
@@ -22,8 +24,14 @@ namespace Game.Character.Enemy {
       if (distance <= this.lookRadius) {
         this._agent.destination = this._target.position;
 
-        if (distance <= this._agent.stoppingDistance) {
+        if (distance <= this._agent.stoppingDistance + 0.5f) {
           // Attack
+          var targetStats = this._target.GetComponent<CharacterStats>();
+          if (targetStats) {
+            if (this._combat.TryAttack(targetStats)) {
+              EventManager.playerHurt.Trigger((targetStats.Health, targetStats.MaxHealth));
+            }
+          }
         }
       }
 
