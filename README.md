@@ -14,6 +14,8 @@ Course: **GAME 360 - Development with Game Engines, Fall 2025**
 
 Install by downloading the build for your OS from the Releases page.
 
+Win by exploring the world and defeating the Red Knight before he gets you first.
+
 ### Controls
 
 All controls are bound to the left mouse button for simplicity
