@@ -2889,9 +2889,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Quit: Esc
+  m_text: 'Move / Interact / Attack:
 
-    Move / Interact: Left-Click'
+    Left-Click'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 450f49f00ac30544daae4287733cbebd, type: 2}
   m_sharedMaterial: {fileID: 8131727142911200763, guid: 450f49f00ac30544daae4287733cbebd, type: 2}
@@ -4451,11 +4451,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8429773379068392153, guid: 667a090cd8062014faa17cc19c6296b2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -0.000020981
       objectReference: {fileID: 0}
     - target: {fileID: 8429773379068392153, guid: 667a090cd8062014faa17cc19c6296b2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -200
+      value: 121
       objectReference: {fileID: 0}
     - target: {fileID: 8429773379068392153, guid: 667a090cd8062014faa17cc19c6296b2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -10084,7 +10084,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8429773379068392153, guid: 667a090cd8062014faa17cc19c6296b2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -198
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 8429773379068392153, guid: 667a090cd8062014faa17cc19c6296b2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
