@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: Lugo Studio
-  productName: GAME360_Task4_Lugo
+  productName: Pondering
   defaultCursor: {fileID: 2800000, guid: 29ced77183455934f84f921a063a810d, type: 3}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.15727916, g: 0.1504539, b: 0.1981132, a: 1}
