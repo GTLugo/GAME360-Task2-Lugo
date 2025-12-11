@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Game.Player {
+namespace Game.Character.Player {
   public class PlayerData : MonoBehaviour {
     [Header("Movement")]
     [field: SerializeField]
@@ -15,12 +15,8 @@ namespace Game.Player {
     public float turnSpeed = 15.0f;
     public float turnTime = 0.1f;
 
-    [Header("Stats")]
     [field: SerializeField]
-    public int Health { get; set; } = 100;
-
-    [field: SerializeField]
-    public int MaxHealth { get; set; } = 100;
+    public CharacterStats Stats { get; set; }
 
     [field: SerializeField]
     public bool HasWon { get; set; }

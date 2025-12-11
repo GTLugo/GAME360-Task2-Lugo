@@ -1,7 +1,7 @@
 using Managers.Global;
 using UnityEngine;
 
-namespace Game.Player {
+namespace Game.Character.Player.States {
   internal class WalkState : State {
     protected override void Enter() {
       this.Player.animator.SetBool(AnimationLibrary.isWalking, true);
@@ -21,7 +21,7 @@ namespace Game.Player {
         return;
       }
 
-      if (this.Player.Data.Health <= 0) {
+      if (this.Player.Data.Stats.Health <= 0) {
         this.Transition<DeadState>();
         return;
       }
@@ -75,7 +75,7 @@ namespace Game.Player {
         return;
       }
 
-      Logger.Log($"Move | Input: {direction}");
+      // Logger.Log($"Move | Input: {direction}");
 
       this.Player.Agent.updatePosition = false;
 

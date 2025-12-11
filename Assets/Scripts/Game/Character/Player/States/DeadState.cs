@@ -1,6 +1,6 @@
 using Managers.Global;
 
-namespace Game.Player {
+namespace Game.Character.Player.States {
   internal class DeadState : State {
     private float _time;
 

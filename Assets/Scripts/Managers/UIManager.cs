@@ -8,15 +8,18 @@ namespace Managers {
     public GameObject scoreObject;
 
     public GameObject wonObject;
+    public GameObject lostObject;
 
     private void OnEnable() {
       EventManager.scoreChanged.Subscribe(this.UpdateScore);
       EventManager.playerWon.Subscribe(this.PlayerWon);
+      EventManager.playerDied.Subscribe(this.PlayerLost);
     }
 
     private void OnDisable() {
       EventManager.scoreChanged.Unsubscribe(this.UpdateScore);
       EventManager.playerWon.Unsubscribe(this.PlayerWon);
+      EventManager.playerDied.Unsubscribe(this.PlayerLost);
     }
 
     private void UpdateScore(int score) {
@@ -36,11 +39,11 @@ namespace Managers {
     }
 
     private void PlayerWon(Vector3 playerPosition) {
-      if (!this.wonObject) {
-        return;
-      }
+      this.wonObject?.SetActive(true);
+    }
 
-      this.wonObject.SetActive(true);
+    private void PlayerLost(Vector3 playerPosition) {
+      this.lostObject?.SetActive(true);
     }
   }
 }

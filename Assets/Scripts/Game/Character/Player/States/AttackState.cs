@@ -1,4 +1,4 @@
-namespace Game.Player {
+namespace Game.Character.Player.States {
   internal class AttackState : State {
     protected override void Enter() {
       Logger.Log($"Player `{this.Player.name}` is Idle");
@@ -10,7 +10,7 @@ namespace Game.Player {
         return;
       }
 
-      if (this.Player.Data.Health <= 0) {
+      if (this.Player.Data.Stats.Health <= 0) {
         this.Transition<DeadState>();
       }
     }

@@ -11,6 +11,9 @@ namespace Managers.Global {
     private AudioClip collectedCoin;
 
     [SerializeField]
+    private AudioClip swing;
+
+    [SerializeField]
     private AudioClip won;
 
     [SerializeField]
@@ -20,12 +23,18 @@ namespace Managers.Global {
       EventManager.coinCollected.Subscribe(this.OnCollectedCoin);
       EventManager.playerWon.Subscribe(this.OnPlayerWon);
       EventManager.buttonPushed.Subscribe(this.OnButtonPushed);
+      EventManager.playerAttacked.Subscribe(this.OnAttacked);
     }
 
     private void OnDisable() {
       EventManager.coinCollected.Unsubscribe(this.OnCollectedCoin);
       EventManager.playerWon.Unsubscribe(this.OnPlayerWon);
       EventManager.buttonPushed.Unsubscribe(this.OnButtonPushed);
+      EventManager.playerAttacked.Unsubscribe(this.OnAttacked);
+    }
+
+    private void OnAttacked(Vector3 playerPosition) {
+      this.PlaySound(this.swing, playerPosition, 0.75f);
     }
 
     private void OnCollectedCoin(Vector3 playerPosition) {

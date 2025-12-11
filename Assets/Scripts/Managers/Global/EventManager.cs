@@ -46,7 +46,8 @@ namespace Managers.Global {
     public static readonly GameEvent<Vector3> coinCollected = new();
     public static readonly GameEvent<Vector3> playerDied = new();
     public static readonly GameEvent<(int, int)> playerHurt = new();
-    public static readonly GameEvent<(int, int)> playerAttacked = new();
+    public static readonly GameEvent<Vector3> playerAttacked = new();
+    public static readonly GameEvent<Vector3> enemyKilled = new();
     public static readonly GameEvent<Vector3> playerRespawned = new();
     public static readonly GameEvent<Vector3> playerWon = new();
     public static readonly GameEvent<int> scoreChanged = new();

@@ -1,6 +1,6 @@
 using Managers.Global;
 
-namespace Game.Player {
+namespace Game.Character.Player.States {
   internal class WonState : State {
     protected override void Enter() {
       this.Player.animator.SetBool(AnimationLibrary.isWalking, false);

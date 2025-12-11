@@ -1,11 +1,9 @@
-using Game.Player;
 using Managers.Global;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
-using State = Game.Player.State;
 
-namespace Game {
+namespace Game.Character.Player {
   public class PlayerController : MonoBehaviour {
     [SerializeField]
     private ParticleSystem clickEffect;
@@ -64,12 +62,16 @@ namespace Game {
       InputManager.Actions.Master.Enable();
       EventManager.playerDied.Subscribe(this.OnDied);
       EventManager.playerRespawned.Subscribe(this.OnRespawn);
+      EventManager.enemyKilled.Subscribe(this.OnEnemyKilled);
+      EventManager.playerAttacked.Subscribe(this.OnAttack);
     }
 
     private void OnDisable() {
       InputManager.Actions.Master.Disable();
       EventManager.playerDied.Unsubscribe(this.OnDied);
       EventManager.playerRespawned.Unsubscribe(this.OnRespawn);
+      EventManager.enemyKilled.Unsubscribe(this.OnEnemyKilled);
+      EventManager.playerAttacked.Unsubscribe(this.OnAttack);
     }
 
     // Called when another collider enters this trigger collider
@@ -82,6 +84,14 @@ namespace Game {
       if (other.CompareTag("Kill")) {
         this.KillCollided(other);
       }
+    }
+
+    private void OnAttack(Vector3 position) {
+      this.animator.SetTrigger(AnimationLibrary.attacked);
+    }
+
+    private void OnEnemyKilled(Vector3 enemyPosition) {
+      this.Data.HasWon = true;
     }
 
     private void SetFocus(Interactable newFocus) {
@@ -148,7 +158,7 @@ namespace Game {
     }
 
     private void KillCollided(Collider collider) {
-      this.Data.Health = 0;
+      this.Data.Stats.Health = 0;
       this.Data.Score /= 2;
       EventManager.scoreChanged.Trigger(this.Data.Score);
     }
@@ -236,7 +246,7 @@ namespace Game {
 
     private void OnRespawn(Vector3 position) {
       this.animator.SetTrigger(AnimationLibrary.wasRevived);
-      this.Data.Health = this.Data.MaxHealth;
+      this.Data.Stats.Health = this.Data.Stats.MaxHealth;
       InputManager.Actions.Master.Enable();
       this.Data.IsAlive = true;
     }

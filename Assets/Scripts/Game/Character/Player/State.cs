@@ -1,4 +1,6 @@
-namespace Game.Player {
+using Game.Character.Player.States;
+
+namespace Game.Character.Player {
   public abstract class State {
     protected PlayerController Player { get; private set; }
 

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Game.Character.Player;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace Game {

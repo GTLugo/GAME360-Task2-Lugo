@@ -79,6 +79,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundSourcePrefab: {fileID: 2597180945183033074, guid: db73da96026e8364ea6325d4295487e8, type: 3}
   collectedCoin: {fileID: 8300000, guid: f28d79a7ce6c4e0408fc8f93b69ee55f, type: 3}
+  swing: {fileID: 8300000, guid: e28497271f629734fbcabc7b15c16cef, type: 3}
   won: {fileID: 8300000, guid: 89cea28fed1b6df4182c60882c2086ed, type: 3}
   buttonPushed: {fileID: 8300000, guid: 045f1a11ee1616f499ab600313bfc812, type: 3}
 --- !u!1 &6184605767382324320
