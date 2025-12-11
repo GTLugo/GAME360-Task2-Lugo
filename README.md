@@ -77,6 +77,7 @@ All controls are bound to the left mouse button for simplicity
 ### Art Assets
 
 * [Kenney](https://kenney.nl/)
+* [Linework](https://assetstore.unity.com/packages/p/linework-outlines-and-edge-detection-294140)
 
 ### Guides
 
