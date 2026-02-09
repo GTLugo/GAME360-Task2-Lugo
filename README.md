@@ -1,6 +1,4 @@
-# Pondering
-
-[Game Banner](Screenshots/banner.png)
+![Game Banner](Screenshots/banner.png)
 
 ## Game Overview
 
@@ -58,13 +56,13 @@ All controls are bound to the left mouse button for simplicity
 
 ## Screenshots
 
-[Screenshot 1](Screenshots/gameplay1.png)
+![Screenshot 1](Screenshots/gameplay1.png)
 *Main gameplay showing game map*
 
-[Screenshot 2](Screenshots/menu.png)
+![Screenshot 2](Screenshots/menu.png)
 *Main menu interface*
 
-[Screenshot 3](Screenshots/victory.png)
+![Screenshot 3](Screenshots/victory.png)
 *Victory screen*
 
 ## Credits
